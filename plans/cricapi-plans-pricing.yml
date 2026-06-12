@@ -1,0 +1,105 @@
+name: CricAPI Plans and Pricing
+description: >
+  CricAPI (CricketData.org) offers a freemium pricing model with a lifetime
+  free tier and four paid monthly plans. All plans provide access to the full
+  API surface including live scores, player statistics, match details, and
+  fantasy cricket endpoints. Plans are differentiated by the number of daily
+  API hits allowed. There are no contracts and cancellation is instant.
+specificationVersion: '0.1'
+url: https://cricketdata.org/pricing/
+plans:
+  - name: Lifetime Free
+    description: >
+      A permanent free tier giving developers access to all Cricket Data APIs
+      with up to 100 hits per day. Includes the CricAPI test tool, near-live
+      data, and email support. No credit card required and no contract.
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Access to all Cricket Data APIs
+      - CricAPI interactive test tool
+      - Near-live cricket data
+      - Email support
+      - No contracts
+    limits:
+      - name: Daily API Hits
+        value: 100
+        unit: hits/day
+
+  - name: Plan S
+    description: >
+      Entry-level paid plan providing 2,000 daily API hits, suitable for
+      small projects, personal apps, and lightweight integrations needing
+      more capacity than the free tier.
+    price: 5.99
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Access to all Cricket Data APIs
+      - CricAPI interactive test tool
+      - Near-live cricket data
+      - Email support
+      - No contracts
+    limits:
+      - name: Daily API Hits
+        value: 2000
+        unit: hits/day
+
+  - name: Plan M
+    description: >
+      Mid-tier plan providing 10,000 daily API hits, suitable for growing
+      sports apps, fantasy cricket platforms, and websites with moderate
+      traffic volumes.
+    price: 12.99
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Access to all Cricket Data APIs
+      - CricAPI interactive test tool
+      - Near-live cricket data
+      - Email support
+      - No contracts
+    limits:
+      - name: Daily API Hits
+        value: 10000
+        unit: hits/day
+
+  - name: Plan L
+    description: >
+      Large-scale plan providing 100,000 daily API hits, suitable for
+      high-traffic sports portals, broadcast integrations, and commercial
+      fantasy cricket league operators.
+    price: 29.99
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Access to all Cricket Data APIs
+      - CricAPI interactive test tool
+      - Near-live cricket data
+      - Email support
+      - No contracts
+    limits:
+      - name: Daily API Hits
+        value: 100000
+        unit: hits/day
+
+  - name: Plan U (Unlimited)
+    description: >
+      Unlimited daily API hits plan for enterprise-scale applications,
+      OTT platforms, and high-volume data consumers requiring unrestricted
+      cricket data access.
+    price: 64.99
+    currency: USD
+    billingCycle: monthly
+    features:
+      - Access to all Cricket Data APIs
+      - CricAPI interactive test tool
+      - Near-live cricket data
+      - Email support
+      - No contracts
+      - Unlimited daily hits
+    limits:
+      - name: Daily API Hits
+        value: unlimited
+        unit: hits/day

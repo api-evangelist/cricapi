@@ -1,0 +1,61 @@
+name: CricAPI Rate Limits
+description: >
+  CricAPI enforces rate limits at the daily hit level, with each plan tier
+  granting a fixed number of API calls per day. The legacy CricAPI platform
+  allowed 100,000 hits per IP per hour with no account required. The current
+  CricketData.org platform tracks usage per API key, and each API response
+  includes hit-count tracking metadata so developers can monitor their
+  consumption in real time. Overages are not charged; requests beyond the
+  daily limit are rejected until the next day's quota resets.
+specificationVersion: '0.1'
+url: https://cricketdata.org/pricing/
+limits:
+  - name: Free Tier Daily Limit
+    description: Maximum number of API calls allowed per day on the Lifetime Free plan.
+    value: 100
+    unit: hits/day
+    scope: per-api-key
+    plan: Lifetime Free
+
+  - name: Plan S Daily Limit
+    description: Maximum number of API calls allowed per day on the S plan.
+    value: 2000
+    unit: hits/day
+    scope: per-api-key
+    plan: Plan S
+
+  - name: Plan M Daily Limit
+    description: Maximum number of API calls allowed per day on the M plan.
+    value: 10000
+    unit: hits/day
+    scope: per-api-key
+    plan: Plan M
+
+  - name: Plan L Daily Limit
+    description: Maximum number of API calls allowed per day on the L plan.
+    value: 100000
+    unit: hits/day
+    scope: per-api-key
+    plan: Plan L
+
+  - name: Plan U Daily Limit
+    description: Unlimited API calls per day on the Unlimited plan.
+    value: unlimited
+    unit: hits/day
+    scope: per-api-key
+    plan: Plan U
+
+  - name: Legacy Hourly Limit
+    description: >
+      The original CricAPI platform (cricapi.com, pre-2021) allowed up to
+      100,000 hits per IP address per hour without authentication, targeting
+      developers and high-performance use cases.
+    value: 100000
+    unit: hits/hour
+    scope: per-ip
+    plan: Legacy (cricapi.com)
+notes:
+  - Each API response includes hit-count data so developers can track quota consumption in real time.
+  - One API call equals one hit regardless of the data returned.
+  - Daily quotas reset every 24 hours.
+  - Requests exceeding the daily limit are rejected; no overage charges apply.

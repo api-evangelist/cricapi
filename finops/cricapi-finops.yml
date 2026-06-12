@@ -1,0 +1,97 @@
+name: CricAPI FinOps
+description: >
+  FinOps Framework FOCUS-aligned cost and usage model for CricAPI
+  (CricketData.org). The platform uses a per-day hit-based billing model where
+  costs are fixed per monthly plan tier rather than metered per individual call.
+  Developers select a plan based on expected daily volume and pay a flat monthly
+  fee with no overage charges. Cost optimization centers on right-sizing the
+  plan to actual daily consumption patterns observed via the in-response hit
+  tracking metadata.
+specificationVersion: '1.0'
+url: https://cricketdata.org/pricing/
+currency: USD
+billingModel: flat-rate-tiered
+billingCycle: monthly
+commitmentOptions:
+  - type: monthly
+    description: Month-to-month subscription with no minimum commitment. Cancel at any time with immediate effect.
+    discount: 0
+
+costDimensions:
+  - name: Plan Subscription
+    description: >
+      Fixed monthly fee based on the selected plan tier. Covers all API
+      endpoints including live scores, player stats, match details, and
+      fantasy cricket data up to the daily hit quota.
+    unit: per-month
+    tiers:
+      - name: Lifetime Free
+        unitCost: 0.00
+        dailyHits: 100
+        effectiveCostPerHit: 0.00
+
+      - name: Plan S
+        unitCost: 5.99
+        dailyHits: 2000
+        effectiveCostPerHit: 0.0030
+        note: Based on $5.99/month / (2000 hits/day x ~30 days = 60,000 hits/month)
+
+      - name: Plan M
+        unitCost: 12.99
+        dailyHits: 10000
+        effectiveCostPerHit: 0.000043
+        note: Based on $12.99/month / (10,000 hits/day x ~30 days = 300,000 hits/month)
+
+      - name: Plan L
+        unitCost: 29.99
+        dailyHits: 100000
+        effectiveCostPerHit: 0.0000100
+        note: Based on $29.99/month / (100,000 hits/day x ~30 days = 3,000,000 hits/month)
+
+      - name: Plan U
+        unitCost: 64.99
+        dailyHits: unlimited
+        effectiveCostPerHit: variable
+
+optimization:
+  - name: Right-Size Plan to Daily Consumption
+    description: >
+      Monitor daily hit consumption via the in-response hit-count metadata.
+      Downgrade to a lower plan if actual daily usage consistently falls below
+      the plan ceiling; upgrade before hitting the daily cap to avoid rejected
+      requests.
+    action: monitor-and-resize
+
+  - name: Cache API Responses
+    description: >
+      Cricket data such as squad lists, player profiles, and historical match
+      records changes infrequently. Caching these responses locally reduces
+      repeated API calls and preserves the daily hit quota for live-data
+      endpoints such as live scores and ball-by-ball updates.
+    action: implement-client-caching
+
+  - name: Use Free Tier for Development and Testing
+    description: >
+      The Lifetime Free plan (100 hits/day) provides access to all endpoints
+      and the CricAPI test tool, making it suitable for development and QA
+      environments without incurring cost. Reserve paid plans for production
+      workloads.
+    action: environment-tiering
+
+  - name: Evaluate Unlimited Plan for High Volume
+    description: >
+      At Plan L consumption levels (100,000 hits/day), upgrading to Plan U
+      ($64.99/month) eliminates any quota risk for burst traffic events such as
+      ICC World Cup matches or IPL finals and may be more cost-effective than
+      managing overage risks on a capped plan.
+    action: volume-threshold-upgrade
+
+policies:
+  - name: No Overage Charges
+    description: Requests beyond the daily limit are rejected with an error response. No additional charges are incurred for exceeding the quota.
+  - name: Non-Refundable
+    description: All plan payments are non-refundable per CricketData.org policy.
+  - name: Instant Cancellation
+    description: Subscriptions can be cancelled at any time and billing ceases immediately upon cancellation.
+  - name: No Contracts
+    description: All plans are month-to-month with no long-term commitment required.
