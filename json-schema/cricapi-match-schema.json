@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cricapi/main/json-schema/cricapi-match-schema.json",
+  "title": "CricAPI Match",
+  "description": "A cricket match object as returned by the CricAPI matches and match_info endpoints",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique GUID identifier for this match"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the match",
+      "example": "India vs Australia, 1st T20I"
+    },
+    "matchType": {
+      "type": "string",
+      "description": "Type of cricket match",
+      "enum": ["odi", "t20", "test"]
+    },
+    "score": {
+      "type": "array",
+      "description": "Score objects per inning (optional, present during or after a match)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "team": { "type": "string", "description": "Team abbreviation or name" },
+          "inning": { "type": "string", "description": "Inning label" },
+          "r": { "type": "integer", "description": "Runs scored" },
+          "w": { "type": "integer", "description": "Wickets lost" },
+          "o": { "type": "number", "description": "Overs bowled" }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Latest match status string (e.g. 'India won by 5 wickets')"
+    },
+    "venue": {
+      "type": "string",
+      "description": "Name and location of the match venue"
+    },
+    "date": {
+      "type": "string",
+      "description": "Date of the match (local)"
+    },
+    "dateTimeGMT": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the match in GMT (UTC+00) ISO 8601 format"
+    },
+    "teams": {
+      "type": "array",
+      "description": "Array of team names participating in the match",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "series_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "GUID of the series this match belongs to"
+    },
+    "fantasyEnabled": {
+      "type": "boolean",
+      "description": "True only if fantasy scorecard, squad, and ball-by-ball data are available"
+    }
+  },
+  "required": ["id", "name", "matchType", "status", "teams"]
+}

@@ -1,0 +1,36 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "47b54677-34de-4378-9019-154e82b9cc1a",
+      "name": "Indian Premier League 2022",
+      "startDate": "Mar 26",
+      "endDate": "May 29",
+      "odi": 0,
+      "t20": 70,
+      "test": 0,
+      "squads": 10,
+      "matches": 70
+    },
+    {
+      "id": "ff5aa3f3-7164-4766-be90-3b64783257a0",
+      "name": "Australia Domestic One-Day Cup 2022-23",
+      "startDate": "Sep 22",
+      "endDate": "Oct 14",
+      "odi": 20,
+      "t20": 0,
+      "test": 0,
+      "squads": 5,
+      "matches": 20
+    }
+  ],
+  "info": {
+    "hitsToday": 5,
+    "hitsLimit": 500,
+    "credits": 0,
+    "server": 18,
+    "offsetRows": 0,
+    "totalRows": 2,
+    "queryTime": 8
+  }
+}

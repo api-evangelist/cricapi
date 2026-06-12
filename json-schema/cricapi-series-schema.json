@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cricapi/main/json-schema/cricapi-series-schema.json",
+  "title": "CricAPI Series",
+  "description": "A cricket series object as returned by the CricAPI series and series_info endpoints",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique GUID identifier for this series"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name and year of the series",
+      "example": "Indian Premier League 2022"
+    },
+    "startDate": {
+      "type": "string",
+      "description": "Start date of the series (Month Day format)",
+      "example": "Mar 26"
+    },
+    "endDate": {
+      "type": "string",
+      "description": "End date of the series (Month Day format)",
+      "example": "May 29"
+    },
+    "odi": {
+      "type": "integer",
+      "description": "Number of ODI matches in this series",
+      "minimum": 0
+    },
+    "t20": {
+      "type": "integer",
+      "description": "Number of T20 matches in this series",
+      "minimum": 0
+    },
+    "test": {
+      "type": "integer",
+      "description": "Number of Test matches in this series",
+      "minimum": 0
+    },
+    "squads": {
+      "type": "integer",
+      "description": "Number of squads loaded (may be fewer than total if data is pending)",
+      "minimum": 0
+    },
+    "matches": {
+      "type": "integer",
+      "description": "Number of matches loaded (may be fewer than total if data is pending)",
+      "minimum": 0
+    }
+  },
+  "required": ["id", "name"]
+}

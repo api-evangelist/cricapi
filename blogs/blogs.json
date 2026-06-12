@@ -1,0 +1,13 @@
+{
+  "blogs": [
+    {
+      "name": "CricketData.org Blog",
+      "description": "Official blog for CricAPI / CricketData.org covering cricket data, API updates, tournament previews, and developer news.",
+      "url": "https://cricketdata.org/blog/",
+      "rss": "https://cricketdata.org/feed/",
+      "type": "RSS",
+      "confirmed": true,
+      "lastChecked": "2026-06-12"
+    }
+  ]
+}

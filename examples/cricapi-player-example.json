@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "data": {
+    "id": "16592242-ef26-45d9-bf23-fc090e90fbbe",
+    "name": "Virat Kohli",
+    "dateOfBirth": "1988-11-05",
+    "role": "Batsman",
+    "battingStyle": "Right-hand bat",
+    "bowlingStyle": "Right-arm medium",
+    "placeOfBirth": "Delhi",
+    "country": "India"
+  },
+  "info": {
+    "hitsToday": 3,
+    "hitsLimit": 500,
+    "credits": 0,
+    "server": 18,
+    "offsetRows": 0,
+    "totalRows": 1,
+    "queryTime": 6
+  }
+}

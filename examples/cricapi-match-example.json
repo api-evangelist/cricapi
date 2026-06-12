@@ -1,0 +1,42 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "820cfd88-3b56-4a6e-9dd8-1203051140da",
+      "name": "India vs Australia, 1st T20I",
+      "matchType": "t20",
+      "score": [
+        {
+          "team": "IND",
+          "inning": "India Inning 1",
+          "r": 186,
+          "w": 7,
+          "o": 20
+        },
+        {
+          "team": "AUS",
+          "inning": "Australia Inning 1",
+          "r": 174,
+          "w": 9,
+          "o": 20
+        }
+      ],
+      "status": "India won by 12 runs",
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "date": "2022-09-20",
+      "dateTimeGMT": "2022-09-20T14:00:00",
+      "teams": ["India", "Australia"],
+      "series_id": "47b54677-34de-4378-9019-154e82b9cc1a",
+      "fantasyEnabled": true
+    }
+  ],
+  "info": {
+    "hitsToday": 10,
+    "hitsLimit": 500,
+    "credits": 0,
+    "server": 18,
+    "offsetRows": 0,
+    "totalRows": 1,
+    "queryTime": 12
+  }
+}

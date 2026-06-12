@@ -58,6 +58,16 @@ apis:
         url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
       - type: FinOps
         url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/openapi/cricapi-cricket-data-api-openapi.yml
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+      - type: Vocabulary
+        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
 common:
   - type: Website
     url: https://www.cricapi.com/
@@ -83,6 +93,10 @@ common:
     url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
   - type: FinOps
     url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: Blog
+    url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/blogs/blogs.json
+  - type: JSONLDContext
+    url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-ld/cricapi-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

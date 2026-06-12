@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cricapi/main/json-schema/cricapi-player-schema.json",
+  "title": "CricAPI Player",
+  "description": "A cricket player object as returned by the CricAPI players and players_info endpoints",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique GUID identifier for this player"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the player"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country the player represents"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Date of birth (present in players_info response)"
+    },
+    "role": {
+      "type": "string",
+      "description": "Player's role on the field",
+      "examples": ["Batsman", "Bowler", "All-Rounder", "Wicket Keeper"]
+    },
+    "battingStyle": {
+      "type": "string",
+      "description": "Batting style of the player",
+      "examples": ["Right-hand bat", "Left-hand bat"]
+    },
+    "bowlingStyle": {
+      "type": "string",
+      "description": "Bowling style of the player",
+      "examples": ["Right-arm medium", "Left-arm orthodox", "Right-arm off break"]
+    },
+    "placeOfBirth": {
+      "type": "string",
+      "description": "City or region where the player was born"
+    }
+  },
+  "required": ["id", "name"]
+}

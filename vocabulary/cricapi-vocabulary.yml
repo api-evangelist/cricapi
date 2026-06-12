@@ -1,0 +1,167 @@
+vocabulary:
+  name: CricAPI Cricket Data Vocabulary
+  description: >
+    Domain vocabulary and terminology used in the CricAPI / CricketData.org
+    cricket data API. Covers match types, player roles, batting and bowling
+    styles, series formats, and response status codes.
+  url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  terms:
+
+    # Match Types
+    - term: odi
+      label: One Day International
+      definition: >
+        A cricket match format limited to 50 overs per side, played between
+        two national teams. Each inning is capped at 300 deliveries.
+
+    - term: t20
+      label: Twenty20
+      definition: >
+        A shortened form of cricket in which each team faces a maximum of
+        20 overs. Used in international (T20I), IPL, BBL, and PSL competitions.
+
+    - term: test
+      label: Test Match
+      definition: >
+        The longest format of cricket, played over up to five days with
+        two innings per side and no over limit.
+
+    # Tournament Abbreviations
+    - term: IPL
+      label: Indian Premier League
+      definition: >
+        India's premier T20 franchise cricket league featuring 10 city-based
+        teams. The most followed domestic T20 competition in the world.
+
+    - term: ICC
+      label: International Cricket Council
+      definition: >
+        The global governing body for cricket, organising international
+        tournaments including the Cricket World Cup, T20 World Cup, and
+        World Test Championship.
+
+    - term: BBL
+      label: Big Bash League
+      definition: >
+        Australia's domestic T20 franchise cricket competition operated
+        by Cricket Australia.
+
+    - term: PSL
+      label: Pakistan Super League
+      definition: >
+        Pakistan's premier franchise T20 cricket league, featuring
+        six city-based teams.
+
+    # Player Roles
+    - term: batsman
+      label: Batsman
+      definition: >
+        A specialist batter whose primary contribution is scoring runs.
+        Can be described as top-order, middle-order, or lower-order.
+
+    - term: bowler
+      label: Bowler
+      definition: >
+        A specialist bowler whose primary role is to take wickets and
+        restrict the opposing team's run-scoring.
+
+    - term: all_rounder
+      label: All-Rounder
+      definition: >
+        A player who contributes significantly with both bat and ball,
+        providing balance to the team.
+
+    - term: wicket_keeper
+      label: Wicket Keeper
+      definition: >
+        A specialist fielder who stands behind the stumps to receive
+        deliveries and effect stumpings and catches.
+
+    # Batting Styles
+    - term: right_hand_bat
+      label: Right-hand bat
+      definition: >
+        A batsman who holds the bat with the right hand lower on the handle,
+        standing with the right side facing the bowler.
+
+    - term: left_hand_bat
+      label: Left-hand bat
+      definition: >
+        A batsman who holds the bat with the left hand lower on the handle,
+        standing with the left side facing the bowler.
+
+    # Bowling Styles
+    - term: right_arm_medium
+      label: Right-arm medium
+      definition: >
+        A right-handed bowler delivering at medium pace, typically between
+        75-85 mph, relying on swing and seam movement.
+
+    - term: right_arm_fast
+      label: Right-arm fast
+      definition: >
+        A right-handed pace bowler delivering above 85 mph.
+
+    - term: left_arm_orthodox
+      label: Left-arm orthodox
+      definition: >
+        A left-arm spin bowler who turns the ball into a right-handed batsman
+        (equivalent to off-spin for a right-armer).
+
+    - term: right_arm_off_break
+      label: Right-arm off break
+      definition: >
+        An off-spin bowler who turns the ball from off to leg for a
+        right-handed batsman.
+
+    - term: right_arm_leg_break
+      label: Right-arm leg break
+      definition: >
+        A leg-spin bowler who turns the ball from leg to off for a
+        right-handed batsman.
+
+    # API Concepts
+    - term: offset
+      label: Pagination Offset
+      definition: >
+        Integer row offset used for paginating API results. Default page size
+        is 25 rows. Combine with totalRows from the info object to calculate
+        the number of pages available.
+
+    - term: fantasyEnabled
+      label: Fantasy Enabled Flag
+      definition: >
+        Boolean flag on match objects. When true, fantasy cricket endpoints
+        (match_squad, match_scorecard, match_points) are available for the match.
+
+    - term: series_id
+      label: Series GUID
+      definition: >
+        A UUID (Globally Unique Identifier) that uniquely identifies a cricket
+        series. Used as the id parameter in series_info requests.
+
+    - term: apikey
+      label: API Key
+      definition: >
+        A GUID-format subscription key required for all API requests. Obtained
+        from your CricketData.org account. Different keys may be used for
+        different subscription tiers.
+
+    # Response Fields
+    - term: hitsToday
+      label: Hits Today
+      definition: >
+        The number of API requests made today with the current API key,
+        as reported in every response's info object.
+
+    - term: hitsLimit
+      label: Daily Hit Limit
+      definition: >
+        The maximum number of API requests allowed per day for the current
+        subscription plan, as reported in every response's info object.
+
+    - term: credits
+      label: Account Credits
+      definition: >
+        Optional field in the response info object reporting remaining prepaid
+        credits for the account. Fantasy API calls consume additional credits.

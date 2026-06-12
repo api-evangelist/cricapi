@@ -1,0 +1,77 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "cricapi": "https://cricketdata.org/vocab#",
+
+    "Match": "schema:SportsEvent",
+    "Series": "schema:SportsOrganization",
+    "Player": "schema:Person",
+    "Country": "schema:Country",
+
+    "id": "@id",
+    "name": "schema:name",
+    "status": "schema:eventStatus",
+    "date": "schema:startDate",
+    "dateTimeGMT": {
+      "@id": "schema:startDate",
+      "@type": "schema:DateTime"
+    },
+    "venue": "schema:location",
+    "teams": {
+      "@id": "schema:competitor",
+      "@container": "@list"
+    },
+    "score": {
+      "@id": "cricapi:score",
+      "@type": "cricapi:InningScore"
+    },
+    "matchType": {
+      "@id": "cricapi:matchType",
+      "@type": "cricapi:MatchType"
+    },
+    "series_id": {
+      "@id": "cricapi:series",
+      "@type": "@id"
+    },
+    "fantasyEnabled": "cricapi:fantasyEnabled",
+
+    "startDate": "schema:startDate",
+    "endDate": "schema:endDate",
+    "odi": "cricapi:odiCount",
+    "t20": "cricapi:t20Count",
+    "test": "cricapi:testCount",
+    "squads": "cricapi:squadCount",
+    "matches": "cricapi:matchCount",
+
+    "country": "schema:nationality",
+    "dateOfBirth": "schema:birthDate",
+    "placeOfBirth": "schema:birthPlace",
+    "role": "cricapi:playerRole",
+    "battingStyle": "cricapi:battingStyle",
+    "bowlingStyle": "cricapi:bowlingStyle",
+
+    "genericFlag": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "fanartFlag": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+
+    "hitsToday": "cricapi:hitsToday",
+    "hitsLimit": "cricapi:hitsLimit",
+    "credits": "cricapi:credits",
+    "offsetRows": "cricapi:offsetRows",
+    "totalRows": "cricapi:totalRows",
+    "queryTime": "cricapi:queryTime",
+    "server": "cricapi:serverId",
+
+    "inning": "cricapi:inning",
+    "r": "cricapi:runs",
+    "w": "cricapi:wickets",
+    "o": "cricapi:overs",
+    "team": "schema:name"
+  }
+}
