@@ -11,7 +11,7 @@ description: >
   The platform is ISO 9001:2015 certified and uses its own AI engine with human
   data entry rather than scraping third-party sources.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -36,7 +36,7 @@ apis:
       match data. It supports fantasy cricket league operations with dedicated
       fantasy scorecard endpoints. Coverage spans international and domestic
       tournaments including ICC events, IPL, T20I, BBL, PSL, and List A cricket.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://cricketdata.org/
     baseURL: https://api.cricapi.com/v1
     tags:
