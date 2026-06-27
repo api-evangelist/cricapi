@@ -85,7 +85,7 @@ common:
     url: https://twitter.com/cricapi
   - type: Contact
     url: https://cricketdata.org/contact/
-  - type: Forum
+  - type: Forums
     url: https://cricketdata.org/forum/
   - type: Plans
     url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
