@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cricapi-cricket-data-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: 'API key for authentication. Obtained from your CricketData.org account. Format:
+    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)'
+  sources:
+  - openapi/cricapi-cricket-data-api-openapi.yml
