@@ -20,20 +20,20 @@
       "method": "feed"
     },
     {
-      "source": "https://cricketdata.org/pricing/",
-      "feed_url": "https://cricketdata.org/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "discovered"
-    },
-    {
       "source": "https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml",
       "feed_url": "https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml",
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://cricketdata.org/pricing/",
+      "feed_url": "https://cricketdata.org/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 8,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 33,
+  "fetched": "2026-07-11T11:50:51Z"
 }
