@@ -69,6 +69,8 @@ apis:
       - type: Vocabulary
         url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/cricapi-agentic-access.yml
   - type: DomainSecurity
     url: security/cricapi-domain-security.yml
   - type: Authentication
