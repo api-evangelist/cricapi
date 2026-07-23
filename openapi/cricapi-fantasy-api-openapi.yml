@@ -1,0 +1,233 @@
+openapi: 3.0.3
+info:
+  title: CricAPI Cricket Data Fantasy API
+  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
+
+    '
+  version: '1.0'
+  termsOfService: https://cricketdata.org/
+  contact:
+    email: contact@cricketdata.org
+    url: https://cricketdata.org/contact/
+  license:
+    name: Proprietary
+    url: https://cricketdata.org/pricing/
+servers:
+- url: https://api.cricapi.com/v1
+  description: CricAPI v1 production server
+security:
+- apiKeyQuery: []
+tags:
+- name: Fantasy
+  description: Fantasy cricket squad, scorecard, and points
+paths:
+  /match_squad:
+    get:
+      operationId: getFantasySquad
+      summary: Fantasy Cricket Squad
+      description: 'Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.
+
+        '
+      tags:
+      - Fantasy
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with fantasy squad
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FantasySquadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_scorecard:
+    get:
+      operationId: getFantasyScorecard
+      summary: Fantasy Cricket Scorecard
+      description: 'Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.
+
+        '
+      tags:
+      - Fantasy
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with fantasy scorecard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_points:
+    get:
+      operationId: getFantasyPoints
+      summary: Fantasy Cricket Points
+      description: 'Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.
+
+        '
+      tags:
+      - Fantasy
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/id'
+      - name: ruleset
+        in: query
+        description: Fantasy ruleset id to use for point calculation
+        required: true
+        schema:
+          type: integer
+          example: 0
+      responses:
+        '200':
+          description: Successful response with fantasy points
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    GenericDataResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          description: Response data (structure varies by endpoint)
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    FantasySquadResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          properties:
+            players:
+              type: array
+              items:
+                $ref: '#/components/schemas/FantasyPlayer'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    FantasyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        role:
+          type: string
+        country:
+          type: string
+        team:
+          type: string
+        fantasyPlayerRating:
+          type: number
+          description: Fantasy rating for the player
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
+  parameters:
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    offset:
+      name: offset
+      in: query
+      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
+
+        '
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+    id:
+      name: id
+      in: query
+      description: Unique GUID identifier for the requested resource
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 47b54677-34de-4378-9019-154e82b9cc1a
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'API key for authentication. Obtained from your CricketData.org account. Format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)
+
+        '
+externalDocs:
+  description: CricAPI Developer Documentation
+  url: https://cricketdata.org/how-to-use-cricket-data-api.aspx

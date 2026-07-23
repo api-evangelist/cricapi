@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: CricAPI Cricket Data Fantasy Generic API
+  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
+
+    '
+  version: '1.0'
+  termsOfService: https://cricketdata.org/
+  contact:
+    email: contact@cricketdata.org
+    url: https://cricketdata.org/contact/
+  license:
+    name: Proprietary
+    url: https://cricketdata.org/pricing/
+servers:
+- url: https://api.cricapi.com/v1
+  description: CricAPI v1 production server
+security:
+- apiKeyQuery: []
+tags:
+- name: Generic
+  description: Generic helper data (countries, flags)
+paths:
+  /countries:
+    get:
+      operationId: listCountries
+      summary: List Countries with Flags
+      description: 'Returns a list of all countries with their flag image URLs. Supports pagination via the offset parameter.
+
+        '
+      tags:
+      - Generic
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with countries list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountriesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
+  schemas:
+    Country:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique 2-letter country ID
+          example: in
+        name:
+          type: string
+          description: Name of the country
+          example: India
+        genericFlag:
+          type: string
+          format: uri
+          description: URL of the country flag (generic)
+          example: https://cdorg.b-cdn.net/flags/generic/IN.svg
+        fanartFlag:
+          type: string
+          format: uri
+          description: Fan art version of the country flag (optional)
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    CountriesResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+  parameters:
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    offset:
+      name: offset
+      in: query
+      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
+
+        '
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'API key for authentication. Obtained from your CricketData.org account. Format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)
+
+        '
+externalDocs:
+  description: CricAPI Developer Documentation
+  url: https://cricketdata.org/how-to-use-cricket-data-api.aspx

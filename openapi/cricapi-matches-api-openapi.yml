@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: CricAPI Cricket Data Fantasy Matches API
+  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
+
+    '
+  version: '1.0'
+  termsOfService: https://cricketdata.org/
+  contact:
+    email: contact@cricketdata.org
+    url: https://cricketdata.org/contact/
+  license:
+    name: Proprietary
+    url: https://cricketdata.org/pricing/
+servers:
+- url: https://api.cricapi.com/v1
+  description: CricAPI v1 production server
+security:
+- apiKeyQuery: []
+tags:
+- name: Matches
+  description: All matches and current live matches
+paths:
+  /matches:
+    get:
+      operationId: listMatches
+      summary: All Matches List
+      description: 'Returns a list of all cricket matches. Supports pagination via offset.
+
+        '
+      tags:
+      - Matches
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with matches list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /currentMatches:
+    get:
+      operationId: listCurrentMatches
+      summary: Current Matches List
+      description: 'Returns a list of currently active / live cricket matches. It is recommended to poll this endpoint at most 2-3 times a day unless live scoring is needed.
+
+        '
+      tags:
+      - Matches
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with current matches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
+  schemas:
+    MatchListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this match
+        name:
+          type: string
+          description: Name of the match
+          example: India vs Australia, 1st T20I
+        matchType:
+          type: string
+          description: Type of match
+          enum:
+          - odi
+          - t20
+          - test
+        score:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchScore'
+          description: Score of the match per inning (optional)
+        status:
+          type: string
+          description: Latest match status
+        venue:
+          type: string
+          description: Venue of the match
+        date:
+          type: string
+          description: Date of the match
+        dateTimeGMT:
+          type: string
+          format: date-time
+          description: Date and time of the match in GMT (ISO 8601)
+        teams:
+          type: array
+          items:
+            type: string
+          description: Names of the teams
+        series_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the series this match belongs to
+        fantasyEnabled:
+          type: boolean
+          description: True only if fantasy scorecard/squad/ball-by-ball is available
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    MatchScore:
+      type: object
+      description: Score details for a match inning
+      properties:
+        team:
+          type: string
+          description: Team name
+        inning:
+          type: string
+          description: Inning identifier
+        r:
+          type: integer
+          description: Runs scored
+        w:
+          type: integer
+          description: Wickets lost
+        o:
+          type: number
+          description: Overs bowled
+  parameters:
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    offset:
+      name: offset
+      in: query
+      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
+
+        '
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'API key for authentication. Obtained from your CricketData.org account. Format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)
+
+        '
+externalDocs:
+  description: CricAPI Developer Documentation
+  url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
