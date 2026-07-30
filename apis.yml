@@ -11,7 +11,20 @@ description: >
   The platform is ISO 9001:2015 certified and uses its own AI engine with human
   data entry rather than scraping third-party sources.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cricapi.png
 url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/apis.yml
 created: '2026-06-12'
 modified: '2026-06-12'
@@ -28,46 +41,228 @@ tags:
   - Schedules
   - Sports Data
 apis:
-  - aid: cricapi:cricket-data-api
-    name: Cricket Data API
-    description: >
-      The Cricket Data API provides live cricket scores, ball-by-ball updates,
-      player statistics, match details, team rankings, schedules, and historical
-      match data. It supports fantasy cricket league operations with dedicated
-      fantasy scorecard endpoints. Coverage spans international and domestic
-      tournaments including ICC events, IPL, T20I, BBL, PSL, and List A cricket.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://cricketdata.org/
-    baseURL: https://api.cricapi.com/v1
-    tags:
-      - Cricket
-      - Live Scores
-      - Player Statistics
-      - Fantasy Cricket
-      - Match Data
-    properties:
-      - type: Documentation
-        url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
-      - type: Pricing
-        url: https://cricketdata.org/pricing/
-      - type: Authentication
-        url: https://cricketdata.org/signup.aspx
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/openapi/cricapi-cricket-data-api-openapi.yml
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-fantasy-api
+  name: CricAPI Fantasy API
+  description: Fantasy cricket squad, scorecard, and points
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Fantasy
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-fantasy-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-generic-api
+  name: CricAPI Generic API
+  description: Generic helper data (countries, flags)
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Generic
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-generic-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-info-api
+  name: CricAPI Info API
+  description: Detailed info endpoints for series, matches, and players
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-info-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-matches-api
+  name: CricAPI Matches API
+  description: All matches and current live matches
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Matches
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-matches-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-players-api
+  name: CricAPI Players API
+  description: Player listing and search
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Players
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-players-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
+- aid: cricapi:cricapi-series-api
+  name: CricAPI Series API
+  description: Cricket series list and search
+  humanURL: https://cricketdata.org/
+  baseURL: https://api.cricapi.com/v1
+  tags:
+  - Series
+  properties:
+  - type: OpenAPI
+    url: openapi/cricapi-series-api-openapi.yml
+  - type: Documentation
+    url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+  - type: Pricing
+    url: https://cricketdata.org/pricing/
+  - type: Authentication
+    url: https://cricketdata.org/signup.aspx
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/plans/cricapi-plans-pricing.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/rate-limits/cricapi-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/finops/cricapi-finops.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-match-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-series-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/json-schema/cricapi-player-schema.json
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/cricapi/refs/heads/main/vocabulary/cricapi-vocabulary.yml
 common:
   - type: AgenticAccess
     url: agentic-access/cricapi-agentic-access.yml
