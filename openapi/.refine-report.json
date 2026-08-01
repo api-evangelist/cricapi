@@ -1,0 +1,24 @@
+{
+  "provider": "cricapi",
+  "sources": [
+    "cricapi-fantasy-api-openapi.yml",
+    "cricapi-generic-api-openapi.yml",
+    "cricapi-info-api-openapi.yml",
+    "cricapi-matches-api-openapi.yml",
+    "cricapi-players-api-openapi.yml",
+    "cricapi-series-api-openapi.yml"
+  ],
+  "outputs": [
+    "cricapi-fantasy-api-openapi.yml",
+    "cricapi-generic-api-openapi.yml",
+    "cricapi-info-api-openapi.yml",
+    "cricapi-matches-api-openapi.yml",
+    "cricapi-players-api-openapi.yml",
+    "cricapi-series-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

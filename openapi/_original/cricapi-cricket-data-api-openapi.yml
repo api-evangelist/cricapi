@@ -1,0 +1,682 @@
+openapi: 3.0.3
+info:
+  title: CricAPI Cricket Data API
+  description: >
+    CricAPI (operating as CricketData.org) provides live cricket scores,
+    ball-by-ball updates, match details, player statistics, team rankings,
+    series schedules, and fantasy cricket scorecard data. Coverage spans
+    international and domestic tournaments including ICC events, IPL, T20I,
+    BBL, and PSL. Historical match data is available back to 2000.
+  version: '1.0'
+  termsOfService: https://cricketdata.org/
+  contact:
+    email: contact@cricketdata.org
+    url: https://cricketdata.org/contact/
+  license:
+    name: Proprietary
+    url: https://cricketdata.org/pricing/
+externalDocs:
+  description: CricAPI Developer Documentation
+  url: https://cricketdata.org/how-to-use-cricket-data-api.aspx
+servers:
+  - url: https://api.cricapi.com/v1
+    description: CricAPI v1 production server
+security:
+  - apiKeyQuery: []
+tags:
+  - name: Generic
+    description: Generic helper data (countries, flags)
+  - name: Series
+    description: Cricket series list and search
+  - name: Matches
+    description: All matches and current live matches
+  - name: Players
+    description: Player listing and search
+  - name: Info
+    description: Detailed info endpoints for series, matches, and players
+  - name: Fantasy
+    description: Fantasy cricket squad, scorecard, and points
+paths:
+  /countries:
+    get:
+      operationId: listCountries
+      summary: List Countries with Flags
+      description: >
+        Returns a list of all countries with their flag image URLs.
+        Supports pagination via the offset parameter.
+      tags:
+        - Generic
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with countries list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountriesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /series:
+    get:
+      operationId: listSeries
+      summary: Cricket Series List
+      description: >
+        Returns a descending-order (latest first) list of all cricket series
+        covered. Series may have partial coverage for some matches.
+        Supports pagination and optional search by name.
+      tags:
+        - Series
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - name: search
+          in: query
+          description: Search string to filter series by name or short name
+          required: false
+          schema:
+            type: string
+            example: IPL
+      responses:
+        '200':
+          description: Successful response with series list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /matches:
+    get:
+      operationId: listMatches
+      summary: All Matches List
+      description: >
+        Returns a list of all cricket matches. Supports pagination via offset.
+      tags:
+        - Matches
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with matches list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /currentMatches:
+    get:
+      operationId: listCurrentMatches
+      summary: Current Matches List
+      description: >
+        Returns a list of currently active / live cricket matches.
+        It is recommended to poll this endpoint at most 2-3 times a day
+        unless live scoring is needed.
+      tags:
+        - Matches
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with current matches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /players:
+    get:
+      operationId: listPlayers
+      summary: All Players List / Search
+      description: >
+        Returns a list of all players in the system along with their country
+        of origin. Supports pagination and optional search by player name.
+      tags:
+        - Players
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - name: search
+          in: query
+          description: Search string to filter players by name
+          required: false
+          schema:
+            type: string
+            example: Kohli
+      responses:
+        '200':
+          description: Successful response with players list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayersListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /series_info:
+    get:
+      operationId: getSeriesInfo
+      summary: Series Info
+      description: >
+        Returns detailed information for a specific series including the
+        list of squads and matches. Requires a valid series id (GUID).
+      tags:
+        - Info
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with series detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesInfoResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_info:
+    get:
+      operationId: getMatchInfo
+      summary: Match Info
+      description: >
+        Returns detailed information for a specific match including
+        score, venue, teams, and fantasy availability flag.
+      tags:
+        - Info
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with match detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchInfoResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /players_info:
+    get:
+      operationId: getPlayerInfo
+      summary: Player Info
+      description: >
+        Returns detailed information for a specific player including
+        date of birth, role, batting/bowling style, place of birth, and country.
+      tags:
+        - Info
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with player detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerInfoResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_squad:
+    get:
+      operationId: getFantasySquad
+      summary: Fantasy Cricket Squad
+      description: >
+        Returns the fantasy cricket squad for a specific match.
+        Only available for matches where fantasyEnabled is true.
+        Fantasy API calls cost additional credits depending on your plan.
+      tags:
+        - Fantasy
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with fantasy squad
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FantasySquadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_scorecard:
+    get:
+      operationId: getFantasyScorecard
+      summary: Fantasy Cricket Scorecard
+      description: >
+        Returns the fantasy cricket scorecard for a specific match.
+        Only available for matches where fantasyEnabled is true.
+      tags:
+        - Fantasy
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful response with fantasy scorecard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /match_points:
+    get:
+      operationId: getFantasyPoints
+      summary: Fantasy Cricket Points
+      description: >
+        Returns fantasy cricket points for players in a specific match.
+        Requires a valid match id and ruleset id.
+      tags:
+        - Fantasy
+      parameters:
+        - $ref: '#/components/parameters/apikey'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/id'
+        - name: ruleset
+          in: query
+          description: Fantasy ruleset id to use for point calculation
+          required: true
+          schema:
+            type: integer
+            example: 0
+      responses:
+        '200':
+          description: Successful response with fantasy points
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: >
+        API key for authentication. Obtained from your CricketData.org account.
+        Format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)
+  parameters:
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    offset:
+      name: offset
+      in: query
+      description: >
+        Row offset for pagination. Default page size is 25 items.
+        Use totalRows from the info object to determine if more pages exist.
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+    id:
+      name: id
+      in: query
+      description: Unique GUID identifier for the requested resource
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 47b54677-34de-4378-9019-154e82b9cc1a
+  schemas:
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    Country:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique 2-letter country ID
+          example: in
+        name:
+          type: string
+          description: Name of the country
+          example: India
+        genericFlag:
+          type: string
+          format: uri
+          description: URL of the country flag (generic)
+          example: https://cdorg.b-cdn.net/flags/generic/IN.svg
+        fanartFlag:
+          type: string
+          format: uri
+          description: Fan art version of the country flag (optional)
+    Series:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this series
+        name:
+          type: string
+          description: Name and year of the series
+          example: Indian Premier League 2022
+        startDate:
+          type: string
+          description: Start date of the series
+          example: Mar 26
+        endDate:
+          type: string
+          description: End date of the series
+          example: May 29
+        odi:
+          type: integer
+          description: Number of ODI matches in this series
+        t20:
+          type: integer
+          description: Number of T20 matches in this series
+        test:
+          type: integer
+          description: Number of Test matches in this series
+        squads:
+          type: integer
+          description: Number of squads for which data is loaded
+        matches:
+          type: integer
+          description: Number of matches for which data is loaded
+    MatchScore:
+      type: object
+      description: Score details for a match inning
+      properties:
+        team:
+          type: string
+          description: Team name
+        inning:
+          type: string
+          description: Inning identifier
+        r:
+          type: integer
+          description: Runs scored
+        w:
+          type: integer
+          description: Wickets lost
+        o:
+          type: number
+          description: Overs bowled
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this match
+        name:
+          type: string
+          description: Name of the match
+          example: India vs Australia, 1st T20I
+        matchType:
+          type: string
+          description: Type of match
+          enum: [odi, t20, test]
+        score:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchScore'
+          description: Score of the match per inning (optional)
+        status:
+          type: string
+          description: Latest match status
+        venue:
+          type: string
+          description: Venue of the match
+        date:
+          type: string
+          description: Date of the match
+        dateTimeGMT:
+          type: string
+          format: date-time
+          description: Date and time of the match in GMT (ISO 8601)
+        teams:
+          type: array
+          items:
+            type: string
+          description: Names of the teams
+        series_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the series this match belongs to
+        fantasyEnabled:
+          type: boolean
+          description: True only if fantasy scorecard/squad/ball-by-ball is available
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this player
+        name:
+          type: string
+          description: Full name of the player
+        country:
+          type: string
+          description: Country the player belongs to
+    PlayerDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this player
+        name:
+          type: string
+          description: Full name of the player
+        dateOfBirth:
+          type: string
+          description: Date of birth
+        role:
+          type: string
+          description: Player's role (e.g. Batsman, Bowler, All-Rounder)
+        battingStyle:
+          type: string
+          description: Batting style (e.g. Right-hand bat)
+        bowlingStyle:
+          type: string
+          description: Bowling style (e.g. Right-arm medium)
+        placeOfBirth:
+          type: string
+          description: Player's place of birth
+        country:
+          type: string
+          description: Player's country
+    FantasyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        role:
+          type: string
+        country:
+          type: string
+        team:
+          type: string
+        fantasyPlayerRating:
+          type: number
+          description: Fantasy rating for the player
+    CountriesResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    SeriesListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Series'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    MatchListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    PlayersListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    SeriesInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: object
+          properties:
+            info:
+              $ref: '#/components/schemas/Series'
+            matchList:
+              type: array
+              items:
+                $ref: '#/components/schemas/Match'
+            squadList:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    MatchInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    PlayerInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          $ref: '#/components/schemas/PlayerDetail'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    FantasySquadResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: object
+          properties:
+            players:
+              type: array
+              items:
+                $ref: '#/components/schemas/FantasyPlayer'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    GenericDataResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, failure]
+        data:
+          type: object
+          description: Response data (structure varies by endpoint)
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [failure]
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
