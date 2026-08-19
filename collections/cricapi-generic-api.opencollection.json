@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CricAPI Cricket Data Fantasy Generic API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Countries with Flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/countries",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              }
+            ]
+          },
+          "docs": "Returns a list of all countries with their flag image URLs. Supports pagination via the offset parameter.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

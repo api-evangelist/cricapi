@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CricAPI Cricket Data Fantasy Info API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Series Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/series_info",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific series including the list of squads and matches. Requires a valid series id (GUID).\n"
+        },
+        {
+          "info": {
+            "name": "Match Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/match_info",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific match including score, venue, teams, and fantasy availability flag.\n"
+        },
+        {
+          "info": {
+            "name": "Player Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/players_info",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific player including date of birth, role, batting/bowling style, place of birth, and country.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

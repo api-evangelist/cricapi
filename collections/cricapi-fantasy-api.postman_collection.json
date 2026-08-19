@@ -1,0 +1,537 @@
+{
+  "item": [
+    {
+      "id": "8a3d063f-7754-489e-9a65-293b6420638a",
+      "name": "Fantasy",
+      "description": {
+        "content": "Fantasy cricket squad, scorecard, and points",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6a1d2d3-9d05-4c9b-bada-e8466aa2f082",
+          "name": "Fantasy Cricket Squad",
+          "request": {
+            "name": "Fantasy Cricket Squad",
+            "description": {
+              "content": "Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match_squad"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bab87783-992f-49f1-8108-373003445b08",
+              "name": "Successful response with fantasy squad",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_squad"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"players\": [\n      {\n        \"id\": \"72c669ae-bd1c-ee7a-0af5-e0641c29cb5f\",\n        \"name\": \"string\",\n        \"role\": \"string\",\n        \"country\": \"string\",\n        \"team\": \"string\",\n        \"fantasyPlayerRating\": 8974.258076769449\n      },\n      {\n        \"id\": \"d02a68f7-a077-3e79-dd62-52e2d180232d\",\n        \"name\": \"string\",\n        \"role\": \"string\",\n        \"country\": \"string\",\n        \"team\": \"string\",\n        \"fantasyPlayerRating\": 5919.271052552953\n      }\n    ]\n  },\n  \"info\": {\n    \"hitsToday\": 865,\n    \"hitsLimit\": 3401,\n    \"credits\": 2422.58438625215,\n    \"server\": 45,\n    \"offsetRows\": 336,\n    \"totalRows\": 2294,\n    \"queryTime\": 4968.384788403143\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4360de28-ef31-4a17-a35a-48a2e77dbe53",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_squad"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84e19bae-2f14-4a4a-ab90-9d295621d95a",
+          "name": "Fantasy Cricket Scorecard",
+          "request": {
+            "name": "Fantasy Cricket Scorecard",
+            "description": {
+              "content": "Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match_scorecard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e2c8bd0-3b95-4396-bca2-662d0bedd502",
+              "name": "Successful response with fantasy scorecard",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_scorecard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": 5339,\n    \"hitsLimit\": 8129,\n    \"credits\": 9230.40053080196,\n    \"server\": 9717,\n    \"offsetRows\": 3935,\n    \"totalRows\": 7529,\n    \"queryTime\": 5532.511938216191\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3e014e9-d6a4-43f0-853c-1e53652b7493",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_scorecard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2068b44a-a08d-4aa5-bcf6-e2a6ee8a6ebc",
+          "name": "Fantasy Cricket Points",
+          "request": {
+            "name": "Fantasy Cricket Points",
+            "description": {
+              "content": "Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match_points"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                },
+                {
+                  "disabled": false,
+                  "key": "ruleset",
+                  "value": "<integer>",
+                  "description": "(Required) Fantasy ruleset id to use for point calculation"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c92ecd66-7f26-4bb6-8258-819eb69ad8ea",
+              "name": "Successful response with fantasy points",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "ruleset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": 5339,\n    \"hitsLimit\": 8129,\n    \"credits\": 9230.40053080196,\n    \"server\": 9717,\n    \"offsetRows\": 3935,\n    \"totalRows\": 7529,\n    \"queryTime\": 5532.511938216191\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d606dee-d40c-4820-b4b1-8d6304aa6020",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "ruleset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cricapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2924d987-0ae9-476e-9c97-803f025ff967",
+    "name": "CricAPI Cricket Data Fantasy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CricAPI Cricket Data Fantasy Matches API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Matches List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/matches",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              }
+            ]
+          },
+          "docs": "Returns a list of all cricket matches. Supports pagination via offset.\n"
+        },
+        {
+          "info": {
+            "name": "Current Matches List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/currentMatches",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              }
+            ]
+          },
+          "docs": "Returns a list of currently active / live cricket matches. It is recommended to poll this endpoint at most 2-3 times a day unless live scoring is needed.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "1343165e-56b5-4898-b4eb-e4c21d804471",
+      "name": "Players",
+      "description": {
+        "content": "Player listing and search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "884128e2-a310-440b-8ce7-7a41e02ca4c9",
+          "name": "All Players List / Search",
+          "request": {
+            "name": "All Players List / Search",
+            "description": {
+              "content": "Returns a list of all players in the system along with their country of origin. Supports pagination and optional search by player name.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "players"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search string to filter players by name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8524637-898c-42c3-af08-194518e0a7e0",
+              "name": "Successful response with players list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "players"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Kohli"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": [\n    {\n      \"id\": \"67e9b856-9154-2594-39af-8e29fc6c317f\",\n      \"name\": \"string\",\n      \"country\": \"string\"\n    },\n    {\n      \"id\": \"1e0df143-d806-3ec6-8475-db7dedd7db8c\",\n      \"name\": \"string\",\n      \"country\": \"string\"\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": 5490,\n    \"hitsLimit\": 8315,\n    \"credits\": 7071.165232627559,\n    \"server\": 1994,\n    \"offsetRows\": 684,\n    \"totalRows\": 7440,\n    \"queryTime\": 6849.852903903204\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1cdbc6d-898c-4aa6-85bb-754276890f8f",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "players"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Kohli"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cricapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18ba1767-6e07-4edd-854e-731eca83154d",
+    "name": "CricAPI Cricket Data Fantasy Players API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
+      "type": "text/plain"
+    }
+  }
+}

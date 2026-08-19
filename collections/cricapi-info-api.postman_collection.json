@@ -1,0 +1,523 @@
+{
+  "item": [
+    {
+      "id": "6a6d2318-9ec5-41f0-9c07-295d3aad3a35",
+      "name": "Info",
+      "description": {
+        "content": "Detailed info endpoints for series, matches, and players",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2f0a98c-f224-4968-a796-28696e4e6c79",
+          "name": "Series Info",
+          "request": {
+            "name": "Series Info",
+            "description": {
+              "content": "Returns detailed information for a specific series including the list of squads and matches. Requires a valid series id (GUID).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series_info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82047dca-4be8-4cd4-880e-b8d2590d7327",
+              "name": "Successful response with series detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"info\": {\n      \"id\": \"667ed4e7-5c57-e044-2ffb-18b8aed496ac\",\n      \"name\": \"Indian Premier League 2022\",\n      \"startDate\": \"Mar 26\",\n      \"endDate\": \"May 29\",\n      \"odi\": 5152,\n      \"t20\": 7470,\n      \"test\": 2205,\n      \"squads\": 7668,\n      \"matches\": 2167\n    },\n    \"matchList\": [\n      {\n        \"id\": \"6f5b9389-ed54-bfc4-3de5-7a9ae1b3de99\",\n        \"name\": \"India vs Australia, 1st T20I\",\n        \"matchType\": \"t20\",\n        \"score\": [\n          {\n            \"team\": \"string\",\n            \"inning\": \"string\",\n            \"r\": 2575,\n            \"w\": 2193,\n            \"o\": 875.2340440244766\n          },\n          {\n            \"team\": \"string\",\n            \"inning\": \"string\",\n            \"r\": 6460,\n            \"w\": 2463,\n            \"o\": 4311.783253436478\n          }\n        ],\n        \"status\": \"string\",\n        \"venue\": \"string\",\n        \"date\": \"string\",\n        \"dateTimeGMT\": \"1978-03-02T08:27:45.926Z\",\n        \"teams\": [\n          \"string\",\n          \"string\"\n        ],\n        \"series_id\": \"acdcc1bc-34b3-3889-8fbc-79b2863b5434\",\n        \"fantasyEnabled\": true\n      },\n      {\n        \"id\": \"c48271af-b052-5eba-e49f-d4ef7f3f8327\",\n        \"name\": \"India vs Australia, 1st T20I\",\n        \"matchType\": \"t20\",\n        \"score\": [\n          {\n            \"team\": \"string\",\n            \"inning\": \"string\",\n            \"r\": 8950,\n            \"w\": 8185,\n            \"o\": 8459.944682238414\n          },\n          {\n            \"team\": \"string\",\n            \"inning\": \"string\",\n            \"r\": 5167,\n            \"w\": 8665,\n            \"o\": 7211.0073243210745\n          }\n        ],\n        \"status\": \"string\",\n        \"venue\": \"string\",\n        \"date\": \"string\",\n        \"dateTimeGMT\": \"1972-06-09T02:02:27.217Z\",\n        \"teams\": [\n          \"string\",\n          \"string\"\n        ],\n        \"series_id\": \"bd30863e-659f-2ad5-7dbd-3a241fe8f59e\",\n        \"fantasyEnabled\": true\n      }\n    ],\n    \"squadList\": [\n      {\n        \"id\": \"095ee08e-6b12-09bd-1448-24875145efc8\",\n        \"name\": \"string\"\n      },\n      {\n        \"id\": \"5a0528d9-a29e-abb4-2aad-a3d53c1870d8\",\n        \"name\": \"string\"\n      }\n    ]\n  },\n  \"info\": {\n    \"hitsToday\": 843,\n    \"hitsLimit\": 8465,\n    \"credits\": 7245.28394558629,\n    \"server\": 1796,\n    \"offsetRows\": 7498,\n    \"totalRows\": 438,\n    \"queryTime\": 1172.274844535557\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b6e31d3-cac4-4c06-b35e-13f90c5701f0",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ebe5bb1-8c63-4e0e-8505-82b3a0a29f20",
+          "name": "Match Info",
+          "request": {
+            "name": "Match Info",
+            "description": {
+              "content": "Returns detailed information for a specific match including score, venue, teams, and fantasy availability flag.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match_info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8404aed-a568-49e8-89db-b7c1625d076c",
+              "name": "Successful response with match detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"48eb5f6f-7218-c78e-07b5-58a71d7bed50\",\n    \"name\": \"India vs Australia, 1st T20I\",\n    \"matchType\": \"test\",\n    \"score\": [\n      {\n        \"team\": \"string\",\n        \"inning\": \"string\",\n        \"r\": 6453,\n        \"w\": 9948,\n        \"o\": 540.2797883146216\n      },\n      {\n        \"team\": \"string\",\n        \"inning\": \"string\",\n        \"r\": 5859,\n        \"w\": 6209,\n        \"o\": 6617.053682452848\n      }\n    ],\n    \"status\": \"string\",\n    \"venue\": \"string\",\n    \"date\": \"string\",\n    \"dateTimeGMT\": \"1958-06-19T18:23:47.543Z\",\n    \"teams\": [\n      \"string\",\n      \"string\"\n    ],\n    \"series_id\": \"b8a9b3dd-b477-a03e-bffa-f034916cc456\",\n    \"fantasyEnabled\": false\n  },\n  \"info\": {\n    \"hitsToday\": 7795,\n    \"hitsLimit\": 1026,\n    \"credits\": 3799.6460490077875,\n    \"server\": 1553,\n    \"offsetRows\": 7272,\n    \"totalRows\": 8705,\n    \"queryTime\": 6074.4524081415075\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ecbd46b-650f-4c00-8806-84727f370749",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2f8eeec-2100-4339-b482-0d03be065bb3",
+          "name": "Player Info",
+          "request": {
+            "name": "Player Info",
+            "description": {
+              "content": "Returns detailed information for a specific player including date of birth, role, batting/bowling style, place of birth, and country.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "players_info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique GUID identifier for the requested resource"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1c48ef8-d268-4ad5-9dde-a36622338d15",
+              "name": "Successful response with player detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "players_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"id\": \"69e4fd86-3d0e-ad8e-6e32-f467aee48d36\",\n    \"name\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"role\": \"string\",\n    \"battingStyle\": \"string\",\n    \"bowlingStyle\": \"string\",\n    \"placeOfBirth\": \"string\",\n    \"country\": \"string\"\n  },\n  \"info\": {\n    \"hitsToday\": 500,\n    \"hitsLimit\": 6236,\n    \"credits\": 5834.09656250516,\n    \"server\": 448,\n    \"offsetRows\": 7542,\n    \"totalRows\": 840,\n    \"queryTime\": 5181.595562275858\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a660897-7b13-4698-8f8e-22e36ffd472d",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "players_info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "id",
+                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cricapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "baf0280e-2ce7-4eff-ae4d-432382ba814f",
+    "name": "CricAPI Cricket Data Fantasy Info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
+      "type": "text/plain"
+    }
+  }
+}

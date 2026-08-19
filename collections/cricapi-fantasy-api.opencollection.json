@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CricAPI Cricket Data Fantasy API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fantasy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fantasy Cricket Squad",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/match_squad",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              }
+            ]
+          },
+          "docs": "Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.\n"
+        },
+        {
+          "info": {
+            "name": "Fantasy Cricket Scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/match_scorecard",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              }
+            ]
+          },
+          "docs": "Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.\n"
+        },
+        {
+          "info": {
+            "name": "Fantasy Cricket Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/match_points",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique GUID identifier for the requested resource"
+              },
+              {
+                "name": "ruleset",
+                "value": "",
+                "type": "query",
+                "description": "Fantasy ruleset id to use for point calculation"
+              }
+            ]
+          },
+          "docs": "Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

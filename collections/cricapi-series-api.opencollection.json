@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CricAPI Cricket Data Fantasy Series API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cricket Series List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cricapi.com/v1/series",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your subscription API key (GUID format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search string to filter series by name or short name"
+              }
+            ]
+          },
+          "docs": "Returns a descending-order (latest first) list of all cricket series covered. Series may have partial coverage for some matches. Supports pagination and optional search by name.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

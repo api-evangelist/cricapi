@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "54b44225-56ec-413e-89ec-ed9ab7fc9d16",
+      "name": "Generic",
+      "description": {
+        "content": "Generic helper data (countries, flags)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c7bec5c-d5d4-484c-98ea-e41037b8c11a",
+          "name": "List Countries with Flags",
+          "request": {
+            "name": "List Countries with Flags",
+            "description": {
+              "content": "Returns a list of all countries with their flag image URLs. Supports pagination via the offset parameter.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8222b863-16bb-470d-9717-effea090c80f",
+              "name": "Successful response with countries list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": [\n    {\n      \"id\": \"in\",\n      \"name\": \"India\",\n      \"genericFlag\": \"https://cdorg.b-cdn.net/flags/generic/IN.svg\",\n      \"fanartFlag\": \"http://imBWXPANNJUrhWmIErxqALIinmfaWYj.gmjcEbsioKeSi\"\n    },\n    {\n      \"id\": \"in\",\n      \"name\": \"India\",\n      \"genericFlag\": \"https://cdorg.b-cdn.net/flags/generic/IN.svg\",\n      \"fanartFlag\": \"https://zQmnbaThYJZFiFqEOxzB.wwzwn9vtNFU,H11f,mOMHvtVzjb6wxABw5pgOS0-jXpPkVhBaR2a2d\"\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": 704,\n    \"hitsLimit\": 3431,\n    \"credits\": 3877.5962136686016,\n    \"server\": 3475,\n    \"offsetRows\": 5767,\n    \"totalRows\": 2436,\n    \"queryTime\": 2409.4860024613063\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b34a99a-6b03-4637-9aa2-5237186d6360",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cricapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "61f7dbc9-8545-4c0d-b51b-74485fecd51c",
+    "name": "CricAPI Cricket Data Fantasy Generic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
+      "type": "text/plain"
+    }
+  }
+}

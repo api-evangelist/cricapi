@@ -1,0 +1,337 @@
+{
+  "item": [
+    {
+      "id": "b9896e33-92f2-4d37-8b56-7f2558b41308",
+      "name": "Matches",
+      "description": {
+        "content": "All matches and current live matches",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8377aa4-9468-4f23-ada2-8e31f5ea871a",
+          "name": "All Matches List",
+          "request": {
+            "name": "All Matches List",
+            "description": {
+              "content": "Returns a list of all cricket matches. Supports pagination via offset.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "becd7551-0629-426c-974e-da4304224aa1",
+              "name": "Successful response with matches list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"29e5101e-1aee-dc8f-bfd0-f9e91a4ebfd0\",\n      \"name\": \"India vs Australia, 1st T20I\",\n      \"matchType\": \"t20\",\n      \"score\": [\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 1692,\n          \"w\": 3541,\n          \"o\": 3246.8979349899587\n        },\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 1577,\n          \"w\": 544,\n          \"o\": 7254.341767042289\n        }\n      ],\n      \"status\": \"string\",\n      \"venue\": \"string\",\n      \"date\": \"string\",\n      \"dateTimeGMT\": \"1999-01-25T08:36:20.942Z\",\n      \"teams\": [\n        \"string\",\n        \"string\"\n      ],\n      \"series_id\": \"7e0e69d3-39d5-6cd3-8f90-82d4a16554d4\",\n      \"fantasyEnabled\": false\n    },\n    {\n      \"id\": \"150a3e3f-15fa-24fa-46a5-3235accfd9e0\",\n      \"name\": \"India vs Australia, 1st T20I\",\n      \"matchType\": \"test\",\n      \"score\": [\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 6160,\n          \"w\": 3617,\n          \"o\": 1769.6851636809752\n        },\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 3043,\n          \"w\": 6754,\n          \"o\": 1966.2038931379145\n        }\n      ],\n      \"status\": \"string\",\n      \"venue\": \"string\",\n      \"date\": \"string\",\n      \"dateTimeGMT\": \"1957-06-14T03:08:57.734Z\",\n      \"teams\": [\n        \"string\",\n        \"string\"\n      ],\n      \"series_id\": \"51dbe46b-a33b-cfe9-2c24-b9eb3f093d8d\",\n      \"fantasyEnabled\": false\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": 5922,\n    \"hitsLimit\": 9921,\n    \"credits\": 1785.7719080402712,\n    \"server\": 9734,\n    \"offsetRows\": 8635,\n    \"totalRows\": 80,\n    \"queryTime\": 3073.8929877311816\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5aa0097-c480-48f9-a61b-69194aa722f0",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a45ff82c-c3fe-4e7e-b41e-51c278fc2fba",
+          "name": "Current Matches List",
+          "request": {
+            "name": "Current Matches List",
+            "description": {
+              "content": "Returns a list of currently active / live cricket matches. It is recommended to poll this endpoint at most 2-3 times a day unless live scoring is needed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "currentMatches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<uuid>",
+                  "description": "(Required) Your subscription API key (GUID format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4663f78-a842-425f-bf60-a993909b2a60",
+              "name": "Successful response with current matches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "currentMatches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"47ae613f-4eb8-6be8-a263-80bc4c02b5a2\",\n      \"name\": \"India vs Australia, 1st T20I\",\n      \"matchType\": \"t20\",\n      \"score\": [\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 514,\n          \"w\": 5410,\n          \"o\": 6612.201835797521\n        },\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 9603,\n          \"w\": 1827,\n          \"o\": 4845.13940586646\n        }\n      ],\n      \"status\": \"string\",\n      \"venue\": \"string\",\n      \"date\": \"string\",\n      \"dateTimeGMT\": \"1968-12-21T04:32:46.657Z\",\n      \"teams\": [\n        \"string\",\n        \"string\"\n      ],\n      \"series_id\": \"46db5991-b234-5716-8bfd-10f48d51f51f\",\n      \"fantasyEnabled\": false\n    },\n    {\n      \"id\": \"28de3c87-dd2d-7c65-5502-f9b7c60ebdd9\",\n      \"name\": \"India vs Australia, 1st T20I\",\n      \"matchType\": \"t20\",\n      \"score\": [\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 5555,\n          \"w\": 571,\n          \"o\": 8313.191719242861\n        },\n        {\n          \"team\": \"string\",\n          \"inning\": \"string\",\n          \"r\": 7792,\n          \"w\": 7849,\n          \"o\": 3542.345217660062\n        }\n      ],\n      \"status\": \"string\",\n      \"venue\": \"string\",\n      \"date\": \"string\",\n      \"dateTimeGMT\": \"2006-07-14T19:43:58.841Z\",\n      \"teams\": [\n        \"string\",\n        \"string\"\n      ],\n      \"series_id\": \"f18e968b-a6fd-d9e4-4597-c7229640fd4e\",\n      \"fantasyEnabled\": false\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": 3267,\n    \"hitsLimit\": 2348,\n    \"credits\": 1001.253230843362,\n    \"server\": 4518,\n    \"offsetRows\": 9189,\n    \"totalRows\": 4257,\n    \"queryTime\": 2775.7119381021657\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72ea76ba-bc1d-445c-8972-02baca6fec88",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "currentMatches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cricapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4bc81e59-1db4-4401-973f-aed81a5651ee",
+    "name": "CricAPI Cricket Data Fantasy Matches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
+      "type": "text/plain"
+    }
+  }
+}
