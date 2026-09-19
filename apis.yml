@@ -50,7 +50,7 @@ tags:
   - Fantasy Cricket
   - Ball-By-Ball
   - Team Rankings
-  - Schedules
+  - Schedule
   - Sports Data
 tags_raw:
   - Cricket
@@ -218,6 +218,8 @@ apis:
   humanURL: https://cricketdata.org/
   baseURL: https://api.cricapi.com/v1
   tags:
+  - Player
+  tags_raw:
   - Players
   properties:
   - type: OpenAPI
