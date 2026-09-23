@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CricAPI Cricket Data Fantasy Info API
-  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
-
-    '
+  title: CricAPI Cricket Data Info API
+  description: CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
   version: '1.0'
   termsOfService: https://cricketdata.org/
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: getSeriesInfo
       summary: Series Info
-      description: 'Returns detailed information for a specific series including the list of squads and matches. Requires a valid series id (GUID).
-
-        '
+      description: Returns detailed information for a specific series including the list of squads and matches. Requires a valid series id (GUID).
       tags:
       - Info
       parameters:
@@ -47,9 +43,7 @@ paths:
     get:
       operationId: getMatchInfo
       summary: Match Info
-      description: 'Returns detailed information for a specific match including score, venue, teams, and fantasy availability flag.
-
-        '
+      description: Returns detailed information for a specific match including score, venue, teams, and fantasy availability flag.
       tags:
       - Info
       parameters:
@@ -69,9 +63,7 @@ paths:
     get:
       operationId: getPlayerInfo
       summary: Player Info
-      description: 'Returns detailed information for a specific player including date of birth, role, batting/bowling style, place of birth, and country.
-
-        '
+      description: Returns detailed information for a specific player including date of birth, role, batting/bowling style, place of birth, and country.
       tags:
       - Info
       parameters:
@@ -88,29 +80,66 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   schemas:
-    PlayerInfoResponse:
+    ErrorResponse:
       type: object
       properties:
         status:
           type: string
           enum:
-          - success
           - failure
-        data:
-          $ref: '#/components/schemas/PlayerDetail'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for this match
+        name:
+          type: string
+          description: Name of the match
+          example: India vs Australia, 1st T20I
+        matchType:
+          type: string
+          description: Type of match
+          enum:
+          - odi
+          - t20
+          - test
+        score:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchScore'
+          description: Score of the match per inning (optional)
+        status:
+          type: string
+          description: Latest match status
+        venue:
+          type: string
+          description: Venue of the match
+        date:
+          type: string
+          description: Date of the match
+        dateTimeGMT:
+          type: string
+          format: date-time
+          description: Date and time of the match in GMT (ISO 8601)
+        teams:
+          type: array
+          items:
+            type: string
+          description: Names of the teams
+        series_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the series this match belongs to
+        fantasyEnabled:
+          type: boolean
+          description: True only if fantasy scorecard/squad/ball-by-ball is available
     MatchScore:
       type: object
       description: Score details for a match inning
@@ -130,18 +159,6 @@ components:
         o:
           type: number
           description: Overs bowled
-    MatchInfoResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          $ref: '#/components/schemas/Match'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
     Series:
       type: object
       properties:
@@ -204,6 +221,55 @@ components:
         country:
           type: string
           description: Player's country
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    PlayerInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          $ref: '#/components/schemas/PlayerDetail'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    MatchInfoResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
     SeriesInfoResponse:
       type: object
       properties:
@@ -233,100 +299,17 @@ components:
                     type: string
         info:
           $ref: '#/components/schemas/ApiInfo'
-    Match:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for this match
-        name:
-          type: string
-          description: Name of the match
-          example: India vs Australia, 1st T20I
-        matchType:
-          type: string
-          description: Type of match
-          enum:
-          - odi
-          - t20
-          - test
-        score:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatchScore'
-          description: Score of the match per inning (optional)
-        status:
-          type: string
-          description: Latest match status
-        venue:
-          type: string
-          description: Venue of the match
-        date:
-          type: string
-          description: Date of the match
-        dateTimeGMT:
-          type: string
-          format: date-time
-          description: Date and time of the match in GMT (ISO 8601)
-        teams:
-          type: array
-          items:
-            type: string
-          description: Names of the teams
-        series_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the series this match belongs to
-        fantasyEnabled:
-          type: boolean
-          description: True only if fantasy scorecard/squad/ball-by-ball is available
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
-    ApiInfo:
-      type: object
-      description: Metadata about the API response including rate limit and pagination info
-      properties:
-        hitsToday:
-          type: integer
-          description: Number of API hits made today for the current API key
-        hitsLimit:
-          type: integer
-          description: Daily hit limit for the current API key
-        credits:
-          type: number
-          description: Credits remaining in account (optional)
-        server:
-          type: integer
-          description: ID of the server that served this response
-        offsetRows:
-          type: integer
-          description: Row offset applied to this response
-        totalRows:
-          type: integer
-          description: Total number of rows available for this query
-        queryTime:
-          type: number
-          description: Query execution time in milliseconds
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   parameters:
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     offset:
       name: offset
       in: query
@@ -348,6 +331,15 @@ components:
         type: string
         format: uuid
         example: 47b54677-34de-4378-9019-154e82b9cc1a
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   securitySchemes:
     apiKeyQuery:
       type: apiKey

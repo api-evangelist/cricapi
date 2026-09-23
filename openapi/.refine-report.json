@@ -1,12 +1,7 @@
 {
   "provider": "cricapi",
   "sources": [
-    "cricapi-fantasy-api-openapi.yml",
-    "cricapi-generic-api-openapi.yml",
-    "cricapi-info-api-openapi.yml",
-    "cricapi-matches-api-openapi.yml",
-    "cricapi-players-api-openapi.yml",
-    "cricapi-series-api-openapi.yml"
+    "_original/cricapi-cricket-data-api-openapi.yml"
   ],
   "outputs": [
     "cricapi-fantasy-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "cricapi-cricket-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "cricapi-fantasy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cricapi-generic-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cricapi-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cricapi-matches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cricapi-players-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cricapi-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

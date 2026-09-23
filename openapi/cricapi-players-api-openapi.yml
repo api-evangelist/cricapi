@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CricAPI Cricket Data Fantasy Players API
-  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
-
-    '
+  title: CricAPI Cricket Data Players API
+  description: CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
   version: '1.0'
   termsOfService: https://cricketdata.org/
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: listPlayers
       summary: All Players List / Search
-      description: 'Returns a list of all players in the system along with their country of origin. Supports pagination and optional search by player name.
-
-        '
+      description: Returns a list of all players in the system along with their country of origin. Supports pagination and optional search by player name.
       tags:
       - Players
       parameters:
@@ -51,20 +47,17 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    PlayersListResponse:
+    ErrorResponse:
       type: object
       properties:
         status:
           type: string
           enum:
-          - success
           - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
     Player:
       type: object
       properties:
@@ -78,17 +71,6 @@ components:
         country:
           type: string
           description: Country the player belongs to
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -114,6 +96,20 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
+    PlayersListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
   responses:
     Unauthorized:
       description: Invalid or missing API key
@@ -125,15 +121,6 @@ components:
             status: failure
             reason: Invalid API Key
   parameters:
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     offset:
       name: offset
       in: query
@@ -146,6 +133,15 @@ components:
         default: 0
         minimum: 0
         example: 0
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   securitySchemes:
     apiKeyQuery:
       type: apiKey

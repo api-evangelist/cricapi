@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CricAPI Cricket Data Fantasy Matches API
-  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
-
-    '
+  title: CricAPI Cricket Data Matches API
+  description: CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
   version: '1.0'
   termsOfService: https://cricketdata.org/
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: listMatches
       summary: All Matches List
-      description: 'Returns a list of all cricket matches. Supports pagination via offset.
-
-        '
+      description: Returns a list of all cricket matches. Supports pagination via offset.
       tags:
       - Matches
       parameters:
@@ -46,9 +42,7 @@ paths:
     get:
       operationId: listCurrentMatches
       summary: Current Matches List
-      description: 'Returns a list of currently active / live cricket matches. It is recommended to poll this endpoint at most 2-3 times a day unless live scoring is needed.
-
-        '
+      description: Returns a list of currently active / live cricket matches. It is recommended to poll this endpoint at most 2-3 times a day unless live scoring is needed.
       tags:
       - Matches
       parameters:
@@ -64,31 +58,18 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   schemas:
-    MatchListResponse:
+    ErrorResponse:
       type: object
       properties:
         status:
           type: string
           enum:
-          - success
           - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Match'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
     Match:
       type: object
       properties:
@@ -137,17 +118,39 @@ components:
         fantasyEnabled:
           type: boolean
           description: True only if fantasy scorecard/squad/ball-by-ball is available
-    ErrorResponse:
+    MatchScore:
+      type: object
+      description: Score details for a match inning
+      properties:
+        team:
+          type: string
+          description: Team name
+        inning:
+          type: string
+          description: Inning identifier
+        r:
+          type: integer
+          description: Runs scored
+        w:
+          type: integer
+          description: Wickets lost
+        o:
+          type: number
+          description: Overs bowled
+    MatchListResponse:
       type: object
       properties:
         status:
           type: string
           enum:
+          - success
           - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -173,35 +176,17 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    MatchScore:
-      type: object
-      description: Score details for a match inning
-      properties:
-        team:
-          type: string
-          description: Team name
-        inning:
-          type: string
-          description: Inning identifier
-        r:
-          type: integer
-          description: Runs scored
-        w:
-          type: integer
-          description: Wickets lost
-        o:
-          type: number
-          description: Overs bowled
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   parameters:
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     offset:
       name: offset
       in: query
@@ -214,6 +199,15 @@ components:
         default: 0
         minimum: 0
         example: 0
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   securitySchemes:
     apiKeyQuery:
       type: apiKey

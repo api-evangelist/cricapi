@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: CricAPI Cricket Data Fantasy API
-  description: 'CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
-
-    '
+  description: CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.
   version: '1.0'
   termsOfService: https://cricketdata.org/
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: getFantasySquad
       summary: Fantasy Cricket Squad
-      description: 'Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.
-
-        '
+      description: Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.
       tags:
       - Fantasy
       parameters:
@@ -47,9 +43,7 @@ paths:
     get:
       operationId: getFantasyScorecard
       summary: Fantasy Cricket Scorecard
-      description: 'Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.
-
-        '
+      description: Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.
       tags:
       - Fantasy
       parameters:
@@ -69,9 +63,7 @@ paths:
     get:
       operationId: getFantasyPoints
       summary: Fantasy Cricket Points
-      description: 'Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.
-
-        '
+      description: Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.
       tags:
       - Fantasy
       parameters:
@@ -96,36 +88,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GenericDataResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          description: Response data (structure varies by endpoint)
-        info:
-          $ref: '#/components/schemas/ApiInfo'
-    FantasySquadResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          properties:
-            players:
-              type: array
-              items:
-                $ref: '#/components/schemas/FantasyPlayer'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
     ErrorResponse:
       type: object
       properties:
@@ -162,6 +124,36 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
+    GenericDataResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          description: Response data (structure varies by endpoint)
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    FantasySquadResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          properties:
+            players:
+              type: array
+              items:
+                $ref: '#/components/schemas/FantasyPlayer'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
     FantasyPlayer:
       type: object
       properties:
@@ -179,26 +171,7 @@ components:
         fantasyPlayerRating:
           type: number
           description: Fantasy rating for the player
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   parameters:
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     offset:
       name: offset
       in: query
@@ -220,6 +193,25 @@ components:
         type: string
         format: uuid
         example: 47b54677-34de-4378-9019-154e82b9cc1a
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey
