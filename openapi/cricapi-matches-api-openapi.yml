@@ -58,18 +58,83 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
+
+        '
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   schemas:
-    ErrorResponse:
+    ApiInfo:
       type: object
+      description: Metadata about the API response including rate limit and pagination info
       properties:
-        status:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    MatchScore:
+      type: object
+      description: Score details for a match inning
+      properties:
+        team:
           type: string
-          enum:
-          - failure
-        reason:
+          description: Team name
+        inning:
           type: string
-          description: Human-readable error message
-          example: Invalid API Key
+          description: Inning identifier
+        r:
+          type: integer
+          description: Runs scored
+        w:
+          type: integer
+          description: Wickets lost
+        o:
+          type: number
+          description: Overs bowled
     Match:
       type: object
       properties:
@@ -118,25 +183,17 @@ components:
         fantasyEnabled:
           type: boolean
           description: True only if fantasy scorecard/squad/ball-by-ball is available
-    MatchScore:
+    ErrorResponse:
       type: object
-      description: Score details for a match inning
       properties:
-        team:
+        status:
           type: string
-          description: Team name
-        inning:
+          enum:
+          - failure
+        reason:
           type: string
-          description: Inning identifier
-        r:
-          type: integer
-          description: Runs scored
-        w:
-          type: integer
-          description: Wickets lost
-        o:
-          type: number
-          description: Overs bowled
+          description: Human-readable error message
+          example: Invalid API Key
     MatchListResponse:
       type: object
       properties:
@@ -151,63 +208,6 @@ components:
             $ref: '#/components/schemas/Match'
         info:
           $ref: '#/components/schemas/ApiInfo'
-    ApiInfo:
-      type: object
-      description: Metadata about the API response including rate limit and pagination info
-      properties:
-        hitsToday:
-          type: integer
-          description: Number of API hits made today for the current API key
-        hitsLimit:
-          type: integer
-          description: Daily hit limit for the current API key
-        credits:
-          type: number
-          description: Credits remaining in account (optional)
-        server:
-          type: integer
-          description: ID of the server that served this response
-        offsetRows:
-          type: integer
-          description: Row offset applied to this response
-        totalRows:
-          type: integer
-          description: Total number of rows available for this query
-        queryTime:
-          type: number
-          description: Query execution time in milliseconds
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
-
-        '
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-        example: 0
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   securitySchemes:
     apiKeyQuery:
       type: apiKey

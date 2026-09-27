@@ -46,18 +46,17 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
     SeriesListResponse:
       type: object
       properties:
@@ -131,16 +130,17 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
   parameters:
     offset:
       name: offset
