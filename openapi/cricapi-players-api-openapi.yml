@@ -46,16 +46,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   schemas:
     PlayersListResponse:
       type: object
@@ -71,6 +61,17 @@ components:
             $ref: '#/components/schemas/Player'
         info:
           $ref: '#/components/schemas/ApiInfo'
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -109,17 +110,6 @@ components:
         country:
           type: string
           description: Country the player belongs to
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
   parameters:
     offset:
       name: offset
@@ -142,6 +132,16 @@ components:
         type: string
         format: uuid
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey

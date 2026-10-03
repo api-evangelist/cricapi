@@ -46,17 +46,43 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
     SeriesListResponse:
       type: object
       properties:
@@ -105,42 +131,6 @@ components:
         matches:
           type: integer
           description: Number of matches for which data is loaded
-    ApiInfo:
-      type: object
-      description: Metadata about the API response including rate limit and pagination info
-      properties:
-        hitsToday:
-          type: integer
-          description: Number of API hits made today for the current API key
-        hitsLimit:
-          type: integer
-          description: Daily hit limit for the current API key
-        credits:
-          type: number
-          description: Credits remaining in account (optional)
-        server:
-          type: integer
-          description: ID of the server that served this response
-        offsetRows:
-          type: integer
-          description: Row offset applied to this response
-        totalRows:
-          type: integer
-          description: Total number of rows available for this query
-        queryTime:
-          type: number
-          description: Query execution time in milliseconds
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
   parameters:
     offset:
       name: offset
@@ -163,6 +153,16 @@ components:
         type: string
         format: uuid
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey

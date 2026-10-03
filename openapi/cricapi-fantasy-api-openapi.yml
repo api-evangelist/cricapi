@@ -87,48 +87,52 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
-  parameters:
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    offset:
-      name: offset
-      in: query
-      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
-
-        '
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-        example: 0
-    id:
-      name: id
-      in: query
-      description: Unique GUID identifier for the requested resource
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 47b54677-34de-4378-9019-154e82b9cc1a
   schemas:
+    FantasySquadResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: object
+          properties:
+            players:
+              type: array
+              items:
+                $ref: '#/components/schemas/FantasyPlayer'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    FantasyPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        role:
+          type: string
+        country:
+          type: string
+        team:
+          type: string
+        fantasyPlayerRating:
+          type: number
+          description: Fantasy rating for the player
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -154,51 +158,6 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    FantasyPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        role:
-          type: string
-        country:
-          type: string
-        team:
-          type: string
-        fantasyPlayerRating:
-          type: number
-          description: Fantasy rating for the player
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
-    FantasySquadResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: object
-          properties:
-            players:
-              type: array
-              items:
-                $ref: '#/components/schemas/FantasyPlayer'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
     GenericDataResponse:
       type: object
       properties:
@@ -212,6 +171,47 @@ components:
           description: Response data (structure varies by endpoint)
         info:
           $ref: '#/components/schemas/ApiInfo'
+  parameters:
+    id:
+      name: id
+      in: query
+      description: Unique GUID identifier for the requested resource
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 47b54677-34de-4378-9019-154e82b9cc1a
+    offset:
+      name: offset
+      in: query
+      description: 'Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.
+
+        '
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        example: 0
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey

@@ -39,37 +39,32 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   schemas:
-    Country:
+    CountriesResponse:
       type: object
       properties:
-        id:
+        status:
           type: string
-          description: Unique 2-letter country ID
-          example: in
-        name:
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    ErrorResponse:
+      type: object
+      properties:
+        status:
           type: string
-          description: Name of the country
-          example: India
-        genericFlag:
+          enum:
+          - failure
+        reason:
           type: string
-          format: uri
-          description: URL of the country flag (generic)
-          example: https://cdorg.b-cdn.net/flags/generic/IN.svg
-        fanartFlag:
-          type: string
-          format: uri
-          description: Fan art version of the country flag (optional)
+          description: Human-readable error message
+          example: Invalid API Key
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -95,31 +90,26 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    ErrorResponse:
+    Country:
       type: object
       properties:
-        status:
+        id:
           type: string
-          enum:
-          - failure
-        reason:
+          description: Unique 2-letter country ID
+          example: in
+        name:
           type: string
-          description: Human-readable error message
-          example: Invalid API Key
-    CountriesResponse:
-      type: object
-      properties:
-        status:
+          description: Name of the country
+          example: India
+        genericFlag:
           type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Country'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+          format: uri
+          description: URL of the country flag (generic)
+          example: https://cdorg.b-cdn.net/flags/generic/IN.svg
+        fanartFlag:
+          type: string
+          format: uri
+          description: Fan art version of the country flag (optional)
   parameters:
     offset:
       name: offset
@@ -142,6 +132,16 @@ components:
         type: string
         format: uuid
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey
