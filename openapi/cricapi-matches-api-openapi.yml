@@ -59,75 +59,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    MatchScore:
-      type: object
-      description: Score details for a match inning
-      properties:
-        team:
-          type: string
-          description: Team name
-        inning:
-          type: string
-          description: Inning identifier
-        r:
-          type: integer
-          description: Runs scored
-        w:
-          type: integer
-          description: Wickets lost
-        o:
-          type: number
-          description: Overs bowled
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
-    MatchListResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Match'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
-    ApiInfo:
-      type: object
-      description: Metadata about the API response including rate limit and pagination info
-      properties:
-        hitsToday:
-          type: integer
-          description: Number of API hits made today for the current API key
-        hitsLimit:
-          type: integer
-          description: Daily hit limit for the current API key
-        credits:
-          type: number
-          description: Credits remaining in account (optional)
-        server:
-          type: integer
-          description: ID of the server that served this response
-        offsetRows:
-          type: integer
-          description: Row offset applied to this response
-        totalRows:
-          type: integer
-          description: Total number of rows available for this query
-        queryTime:
-          type: number
-          description: Query execution time in milliseconds
     Match:
       type: object
       properties:
@@ -176,6 +107,85 @@ components:
         fantasyEnabled:
           type: boolean
           description: True only if fantasy scorecard/squad/ball-by-ball is available
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
+    ApiInfo:
+      type: object
+      description: Metadata about the API response including rate limit and pagination info
+      properties:
+        hitsToday:
+          type: integer
+          description: Number of API hits made today for the current API key
+        hitsLimit:
+          type: integer
+          description: Daily hit limit for the current API key
+        credits:
+          type: number
+          description: Credits remaining in account (optional)
+        server:
+          type: integer
+          description: ID of the server that served this response
+        offsetRows:
+          type: integer
+          description: Row offset applied to this response
+        totalRows:
+          type: integer
+          description: Total number of rows available for this query
+        queryTime:
+          type: number
+          description: Query execution time in milliseconds
+    MatchListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+    MatchScore:
+      type: object
+      description: Score details for a match inning
+      properties:
+        team:
+          type: string
+          description: Team name
+        inning:
+          type: string
+          description: Inning identifier
+        r:
+          type: integer
+          description: Runs scored
+        w:
+          type: integer
+          description: Wickets lost
+        o:
+          type: number
+          description: Overs bowled
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   parameters:
     offset:
       name: offset
@@ -198,16 +208,6 @@ components:
         type: string
         format: uuid
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey

@@ -88,7 +88,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    FantasySquadResponse:
+    GenericDataResponse:
       type: object
       properties:
         status:
@@ -98,24 +98,9 @@ components:
           - failure
         data:
           type: object
-          properties:
-            players:
-              type: array
-              items:
-                $ref: '#/components/schemas/FantasyPlayer'
+          description: Response data (structure varies by endpoint)
         info:
           $ref: '#/components/schemas/ApiInfo'
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
     FantasyPlayer:
       type: object
       properties:
@@ -133,6 +118,17 @@ components:
         fantasyPlayerRating:
           type: number
           description: Fantasy rating for the player
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -158,7 +154,7 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    GenericDataResponse:
+    FantasySquadResponse:
       type: object
       properties:
         status:
@@ -168,7 +164,11 @@ components:
           - failure
         data:
           type: object
-          description: Response data (structure varies by endpoint)
+          properties:
+            players:
+              type: array
+              items:
+                $ref: '#/components/schemas/FantasyPlayer'
         info:
           $ref: '#/components/schemas/ApiInfo'
   parameters:

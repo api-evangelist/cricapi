@@ -47,20 +47,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    PlayersListResponse:
+    Player:
       type: object
       properties:
-        status:
+        id:
           type: string
-          enum:
-          - success
-          - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+          format: uuid
+          description: Unique identifier for this player
+        name:
+          type: string
+          description: Full name of the player
+        country:
+          type: string
+          description: Country the player belongs to
     ErrorResponse:
       type: object
       properties:
@@ -97,19 +96,30 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    Player:
+    PlayersListResponse:
       type: object
       properties:
-        id:
+        status:
           type: string
-          format: uuid
-          description: Unique identifier for this player
-        name:
-          type: string
-          description: Full name of the player
-        country:
-          type: string
-          description: Country the player belongs to
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
+  responses:
+    Unauthorized:
+      description: Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            status: failure
+            reason: Invalid API Key
   parameters:
     offset:
       name: offset
@@ -132,16 +142,6 @@ components:
         type: string
         format: uuid
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-  responses:
-    Unauthorized:
-      description: Invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: failure
-            reason: Invalid API Key
   securitySchemes:
     apiKeyQuery:
       type: apiKey
