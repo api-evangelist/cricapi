@@ -47,6 +47,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    PlayersListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        info:
+          $ref: '#/components/schemas/ApiInfo'
     Player:
       type: object
       properties:
@@ -60,17 +74,6 @@ components:
         country:
           type: string
           description: Country the player belongs to
-    ErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        reason:
-          type: string
-          description: Human-readable error message
-          example: Invalid API Key
     ApiInfo:
       type: object
       description: Metadata about the API response including rate limit and pagination info
@@ -96,20 +99,17 @@ components:
         queryTime:
           type: number
           description: Query execution time in milliseconds
-    PlayersListResponse:
+    ErrorResponse:
       type: object
       properties:
         status:
           type: string
           enum:
-          - success
           - failure
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-        info:
-          $ref: '#/components/schemas/ApiInfo'
+        reason:
+          type: string
+          description: Human-readable error message
+          example: Invalid API Key
   responses:
     Unauthorized:
       description: Invalid or missing API key
@@ -121,6 +121,15 @@ components:
             status: failure
             reason: Invalid API Key
   parameters:
+    apikey:
+      name: apikey
+      in: query
+      description: Your subscription API key (GUID format)
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     offset:
       name: offset
       in: query
@@ -133,15 +142,6 @@ components:
         default: 0
         minimum: 0
         example: 0
-    apikey:
-      name: apikey
-      in: query
-      description: Your subscription API key (GUID format)
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   securitySchemes:
     apiKeyQuery:
       type: apiKey
