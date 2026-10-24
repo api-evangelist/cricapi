@@ -1,181 +1,179 @@
 {
+  "info": {
+    "_postman_id": "ba66d0fc-6eb2-4123-89be-a8ab042b8c0a",
+    "name": "CricAPI Cricket Data Series API",
+    "description": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\nContact Support:\n Email: contact@cricketdata.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:05:44.000Z",
+    "updatedAt": "2026-10-21T21:05:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ba66d0fc-6eb2-4123-89be-a8ab042b8c0a"
+  },
   "item": [
     {
-      "id": "95eb186f-1653-4db7-ada0-eeef5f9dc14b",
-      "name": "Series",
-      "description": {
-        "content": "Cricket series list and search",
-        "type": "text/plain"
-      },
+      "name": "series",
       "item": [
         {
-          "id": "b320be98-813d-4422-a9a7-eb89cc7fe5f0",
           "name": "Cricket Series List",
+          "id": "02d9f23c-4a1c-4c64-8285-15a94579b15c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Cricket Series List",
-            "description": {
-              "content": "Returns a descending-order (latest first) list of all cricket series covered. Series may have partial coverage for some matches. Supports pagination and optional search by name.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "series"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "apikey",
-                  "value": "<uuid>",
-                  "description": "(Required) Your subscription API key (GUID format)"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0",
-                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
-                },
-                {
-                  "disabled": false,
-                  "key": "search",
-                  "value": "<string>",
-                  "description": "Search string to filter series by name or short name"
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/series?apikey=<uuid>&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "series"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your subscription API key (GUID format)",
+                  "key": "apikey",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Search string to filter series by name or short name",
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a descending-order (latest first) list of all cricket series covered. Series may have partial coverage for some matches. Supports pagination and optional search by name."
           },
           "response": [
             {
-              "id": "e9a4a576-389f-4594-8930-6f13895dd862",
+              "id": "54ea7a87-5709-464f-94a3-28387e1bd29d",
               "name": "Successful response with series list",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "series"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "search",
-                      "value": "IPL"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/series?apikey=<API Key>&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Search string to filter series by name or short name",
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"f9a84a91-6fa9-d7d8-051a-45dd037f2e4d\",\n      \"name\": \"Indian Premier League 2022\",\n      \"startDate\": \"Mar 26\",\n      \"endDate\": \"May 29\",\n      \"odi\": 8188,\n      \"t20\": 2543,\n      \"test\": 2079,\n      \"squads\": 4824,\n      \"matches\": 3139\n    },\n    {\n      \"id\": \"e3fd3a8a-0d3d-875d-99b1-24bc191281a6\",\n      \"name\": \"Indian Premier League 2022\",\n      \"startDate\": \"Mar 26\",\n      \"endDate\": \"May 29\",\n      \"odi\": 4370,\n      \"t20\": 4376,\n      \"test\": 335,\n      \"squads\": 3098,\n      \"matches\": 6970\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": 7674,\n    \"hitsLimit\": 6415,\n    \"credits\": 8493.996428711636,\n    \"server\": 8881,\n    \"offsetRows\": 305,\n    \"totalRows\": 7988,\n    \"queryTime\": 8078.632041114496\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\",\n      \"odi\": \"<integer>\",\n      \"t20\": \"<integer>\",\n      \"test\": \"<integer>\",\n      \"squads\": \"<integer>\",\n      \"matches\": \"<integer>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\",\n      \"odi\": \"<integer>\",\n      \"t20\": \"<integer>\",\n      \"test\": \"<integer>\",\n      \"squads\": \"<integer>\",\n      \"matches\": \"<integer>\"\n    }\n  ],\n  \"info\": {\n    \"hitsToday\": \"<integer>\",\n    \"hitsLimit\": \"<integer>\",\n    \"credits\": \"<number>\",\n    \"server\": \"<integer>\",\n    \"offsetRows\": \"<integer>\",\n    \"totalRows\": \"<integer>\",\n    \"queryTime\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:05:45.000Z",
+              "updatedAt": "2026-10-21T21:05:45.000Z",
+              "uid": "35240-54ea7a87-5709-464f-94a3-28387e1bd29d"
             },
             {
-              "id": "7389c30d-034e-4704-aba1-dcd2284da4d2",
+              "id": "93665661-d63e-422c-a296-d18ac3a77199",
               "name": "Invalid or missing API key",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "series"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "search",
-                      "value": "IPL"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/series?apikey=<API Key>&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Search string to filter series by name or short name",
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:05:45.000Z",
+              "updatedAt": "2026-10-21T21:05:45.000Z",
+              "uid": "35240-93665661-d63e-422c-a296-d18ac3a77199"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:05:45.000Z",
+          "updatedAt": "2026-10-21T21:05:45.000Z",
+          "uid": "35240-02d9f23c-4a1c-4c64-8285-15a94579b15c"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.cricapi.com/v1",
-      "key": "baseUrl"
+      "id": "1fa68ab0-7d46-45c7-ad7d-ef70fcf55331",
+      "createdAt": "2026-10-21T21:05:45.000Z",
+      "updatedAt": "2026-10-21T21:05:45.000Z",
+      "uid": "35240-1fa68ab0-7d46-45c7-ad7d-ef70fcf55331"
     }
   ],
   "auth": {
@@ -183,25 +181,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "apikey"
+        "value": "apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "676c442d-4456-4f87-a182-e76a4a248711",
-    "name": "CricAPI Cricket Data Fantasy Series API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cricapi.com/v1"
     }
-  }
+  ]
 }

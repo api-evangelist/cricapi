@@ -1,511 +1,524 @@
 {
+  "info": {
+    "_postman_id": "ff43169b-a448-4297-ab5d-efb456786dcb",
+    "name": "CricAPI Cricket Data Fantasy API",
+    "description": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\nContact Support:\n Email: contact@cricketdata.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:05:13.000Z",
+    "updatedAt": "2026-10-21T21:05:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ff43169b-a448-4297-ab5d-efb456786dcb"
+  },
   "item": [
     {
-      "id": "8a3d063f-7754-489e-9a65-293b6420638a",
-      "name": "Fantasy",
-      "description": {
-        "content": "Fantasy cricket squad, scorecard, and points",
-        "type": "text/plain"
-      },
+      "name": "match_squad",
       "item": [
         {
-          "id": "c6a1d2d3-9d05-4c9b-bada-e8466aa2f082",
           "name": "Fantasy Cricket Squad",
+          "id": "a6bcc395-399e-4e0e-8f84-79411e1c6227",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Fantasy Cricket Squad",
-            "description": {
-              "content": "Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan.\n",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/match_squad?apikey=<uuid>&offset=0&id=<uuid>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "match_squad"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Your subscription API key (GUID format)",
                   "key": "apikey",
-                  "value": "<uuid>",
-                  "description": "(Required) Your subscription API key (GUID format)"
+                  "value": "<uuid>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
                   "key": "offset",
-                  "value": "0",
-                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                  "value": "0"
                 },
                 {
-                  "disabled": false,
+                  "description": "(Required) Unique GUID identifier for the requested resource",
                   "key": "id",
-                  "value": "<uuid>",
-                  "description": "(Required) Unique GUID identifier for the requested resource"
+                  "value": "<uuid>"
+                }
+              ]
+            },
+            "description": "Returns the fantasy cricket squad for a specific match. Only available for matches where fantasyEnabled is true. Fantasy API calls cost additional credits depending on your plan."
+          },
+          "response": [
+            {
+              "id": "6fa62d7d-2855-4c26-9bc7-5bba7d073f12",
+              "name": "Successful response with fantasy squad",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/match_squad?apikey=<API Key>&offset=0&id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_squad"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"players\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"country\": \"<string>\",\n        \"team\": \"<string>\",\n        \"fantasyPlayerRating\": \"<number>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"country\": \"<string>\",\n        \"team\": \"<string>\",\n        \"fantasyPlayerRating\": \"<number>\"\n      }\n    ]\n  },\n  \"info\": {\n    \"hitsToday\": \"<integer>\",\n    \"hitsLimit\": \"<integer>\",\n    \"credits\": \"<number>\",\n    \"server\": \"<integer>\",\n    \"offsetRows\": \"<integer>\",\n    \"totalRows\": \"<integer>\",\n    \"queryTime\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-6fa62d7d-2855-4c26-9bc7-5bba7d073f12"
             },
+            {
+              "id": "26dc9e3d-e096-488d-9799-34946449cec5",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/match_squad?apikey=<API Key>&offset=0&id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_squad"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-26dc9e3d-e096-488d-9799-34946449cec5"
+            }
+          ],
+          "createdAt": "2026-10-21T21:05:14.000Z",
+          "updatedAt": "2026-10-21T21:05:14.000Z",
+          "uid": "35240-a6bcc395-399e-4e0e-8f84-79411e1c6227"
+        }
+      ],
+      "id": "d2b735b5-9925-4534-b668-aa72a93de911",
+      "createdAt": "2026-10-21T21:05:14.000Z",
+      "updatedAt": "2026-10-21T21:05:14.000Z",
+      "uid": "35240-d2b735b5-9925-4534-b668-aa72a93de911"
+    },
+    {
+      "name": "match_scorecard",
+      "item": [
+        {
+          "name": "Fantasy Cricket Scorecard",
+          "id": "5faedd8d-0e1e-4d0f-a86c-28f2e6496637",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "bab87783-992f-49f1-8108-373003445b08",
-              "name": "Successful response with fantasy squad",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_squad"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"failure\",\n  \"data\": {\n    \"players\": [\n      {\n        \"id\": \"72c669ae-bd1c-ee7a-0af5-e0641c29cb5f\",\n        \"name\": \"string\",\n        \"role\": \"string\",\n        \"country\": \"string\",\n        \"team\": \"string\",\n        \"fantasyPlayerRating\": 8974.258076769449\n      },\n      {\n        \"id\": \"d02a68f7-a077-3e79-dd62-52e2d180232d\",\n        \"name\": \"string\",\n        \"role\": \"string\",\n        \"country\": \"string\",\n        \"team\": \"string\",\n        \"fantasyPlayerRating\": 5919.271052552953\n      }\n    ]\n  },\n  \"info\": {\n    \"hitsToday\": 865,\n    \"hitsLimit\": 3401,\n    \"credits\": 2422.58438625215,\n    \"server\": 45,\n    \"offsetRows\": 336,\n    \"totalRows\": 2294,\n    \"queryTime\": 4968.384788403143\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4360de28-ef31-4a17-a35a-48a2e77dbe53",
-              "name": "Invalid or missing API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_squad"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "84e19bae-2f14-4a4a-ab90-9d295621d95a",
-          "name": "Fantasy Cricket Scorecard",
-          "request": {
-            "name": "Fantasy Cricket Scorecard",
-            "description": {
-              "content": "Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true.\n",
-              "type": "text/plain"
-            },
             "url": {
+              "raw": "{{baseUrl}}/match_scorecard?apikey=<uuid>&offset=0&id=<uuid>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "match_scorecard"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Your subscription API key (GUID format)",
                   "key": "apikey",
-                  "value": "<uuid>",
-                  "description": "(Required) Your subscription API key (GUID format)"
+                  "value": "<uuid>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
                   "key": "offset",
-                  "value": "0",
-                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                  "value": "0"
                 },
                 {
-                  "disabled": false,
+                  "description": "(Required) Unique GUID identifier for the requested resource",
                   "key": "id",
-                  "value": "<uuid>",
-                  "description": "(Required) Unique GUID identifier for the requested resource"
+                  "value": "<uuid>"
+                }
+              ]
+            },
+            "description": "Returns the fantasy cricket scorecard for a specific match. Only available for matches where fantasyEnabled is true."
+          },
+          "response": [
+            {
+              "id": "f35cbbe4-61e5-4733-985b-048c015d3b39",
+              "name": "Successful response with fantasy scorecard",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/match_scorecard?apikey=<API Key>&offset=0&id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_scorecard"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": \"<integer>\",\n    \"hitsLimit\": \"<integer>\",\n    \"credits\": \"<number>\",\n    \"server\": \"<integer>\",\n    \"offsetRows\": \"<integer>\",\n    \"totalRows\": \"<integer>\",\n    \"queryTime\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-f35cbbe4-61e5-4733-985b-048c015d3b39"
             },
+            {
+              "id": "bf201aa3-0f98-4401-9e50-77bfad425900",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/match_scorecard?apikey=<API Key>&offset=0&id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_scorecard"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-bf201aa3-0f98-4401-9e50-77bfad425900"
+            }
+          ],
+          "createdAt": "2026-10-21T21:05:14.000Z",
+          "updatedAt": "2026-10-21T21:05:14.000Z",
+          "uid": "35240-5faedd8d-0e1e-4d0f-a86c-28f2e6496637"
+        }
+      ],
+      "id": "67ad5928-6e0e-45b3-a400-36d4c7c117a1",
+      "createdAt": "2026-10-21T21:05:14.000Z",
+      "updatedAt": "2026-10-21T21:05:14.000Z",
+      "uid": "35240-67ad5928-6e0e-45b3-a400-36d4c7c117a1"
+    },
+    {
+      "name": "match_points",
+      "item": [
+        {
+          "name": "Fantasy Cricket Points",
+          "id": "27196759-c3bd-4604-8034-4c770cd3136b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5e2c8bd0-3b95-4396-bca2-662d0bedd502",
-              "name": "Successful response with fantasy scorecard",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_scorecard"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"failure\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": 5339,\n    \"hitsLimit\": 8129,\n    \"credits\": 9230.40053080196,\n    \"server\": 9717,\n    \"offsetRows\": 3935,\n    \"totalRows\": 7529,\n    \"queryTime\": 5532.511938216191\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d3e014e9-d6a4-43f0-853c-1e53652b7493",
-              "name": "Invalid or missing API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_scorecard"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2068b44a-a08d-4aa5-bcf6-e2a6ee8a6ebc",
-          "name": "Fantasy Cricket Points",
-          "request": {
-            "name": "Fantasy Cricket Points",
-            "description": {
-              "content": "Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id.\n",
-              "type": "text/plain"
-            },
             "url": {
+              "raw": "{{baseUrl}}/match_points?apikey=<uuid>&offset=0&id=<uuid>&ruleset=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "match_points"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Your subscription API key (GUID format)",
                   "key": "apikey",
-                  "value": "<uuid>",
-                  "description": "(Required) Your subscription API key (GUID format)"
+                  "value": "<uuid>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
                   "key": "offset",
-                  "value": "0",
-                  "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n"
+                  "value": "0"
                 },
                 {
-                  "disabled": false,
+                  "description": "(Required) Unique GUID identifier for the requested resource",
                   "key": "id",
-                  "value": "<uuid>",
-                  "description": "(Required) Unique GUID identifier for the requested resource"
+                  "value": "<uuid>"
                 },
                 {
-                  "disabled": false,
+                  "description": "(Required) Fantasy ruleset id to use for point calculation",
                   "key": "ruleset",
-                  "value": "<integer>",
-                  "description": "(Required) Fantasy ruleset id to use for point calculation"
+                  "value": "<integer>"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Returns fantasy cricket points for players in a specific match. Requires a valid match id and ruleset id."
           },
           "response": [
             {
-              "id": "c92ecd66-7f26-4bb6-8258-819eb69ad8ea",
+              "id": "9f718931-78a2-45cc-a972-42c43bc5ba93",
               "name": "Successful response with fantasy points",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_points"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "ruleset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/match_points?apikey=<API Key>&offset=0&id=<uuid>&ruleset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_points"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "(Required) Fantasy ruleset id to use for point calculation",
+                      "key": "ruleset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"status\": \"failure\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": 5339,\n    \"hitsLimit\": 8129,\n    \"credits\": 9230.40053080196,\n    \"server\": 9717,\n    \"offsetRows\": 3935,\n    \"totalRows\": 7529,\n    \"queryTime\": 5532.511938216191\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"info\": {\n    \"hitsToday\": \"<integer>\",\n    \"hitsLimit\": \"<integer>\",\n    \"credits\": \"<number>\",\n    \"server\": \"<integer>\",\n    \"offsetRows\": \"<integer>\",\n    \"totalRows\": \"<integer>\",\n    \"queryTime\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-9f718931-78a2-45cc-a972-42c43bc5ba93"
             },
             {
-              "id": "9d606dee-d40c-4820-b4b1-8d6304aa6020",
+              "id": "54eacc30-81c6-4674-873a-c9230acc0778",
               "name": "Invalid or missing API key",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "match_points"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apikey",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "id",
-                      "value": "47b54677-34de-4378-9019-154e82b9cc1a"
-                    },
-                    {
-                      "key": "ruleset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "apikey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/match_points?apikey=<API Key>&offset=0&id=<uuid>&ruleset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "match_points"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your subscription API key (GUID format)",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Row offset for pagination. Default page size is 25 items. Use totalRows from the info object to determine if more pages exist.\n",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "(Required) Unique GUID identifier for the requested resource",
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "(Required) Fantasy ruleset id to use for point calculation",
+                      "key": "ruleset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"Invalid API Key\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"status\": \"failure\",\n  \"reason\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:05:14.000Z",
+              "updatedAt": "2026-10-21T21:05:14.000Z",
+              "uid": "35240-54eacc30-81c6-4674-873a-c9230acc0778"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:05:14.000Z",
+          "updatedAt": "2026-10-21T21:05:14.000Z",
+          "uid": "35240-27196759-c3bd-4604-8034-4c770cd3136b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.cricapi.com/v1",
-      "key": "baseUrl"
+      "id": "765f7c99-2dc7-4917-899b-abd1923851d4",
+      "createdAt": "2026-10-21T21:05:14.000Z",
+      "updatedAt": "2026-10-21T21:05:14.000Z",
+      "uid": "35240-765f7c99-2dc7-4917-899b-abd1923851d4"
     }
   ],
   "auth": {
@@ -513,25 +526,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "apikey"
+        "value": "apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "2924d987-0ae9-476e-9c97-803f025ff967",
-    "name": "CricAPI Cricket Data Fantasy API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "CricAPI (operating as CricketData.org) provides live cricket scores, ball-by-ball updates, match details, player statistics, team rankings, series schedules, and fantasy cricket scorecard data. Coverage spans international and domestic tournaments including ICC events, IPL, T20I, BBL, and PSL. Historical match data is available back to 2000.\n\n\nContact Support:\n Email: contact@cricketdata.org",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cricapi.com/v1"
     }
-  }
+  ]
 }
